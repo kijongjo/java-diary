@@ -1,5 +1,4 @@
-# java-diary
-java 공부한 내용을 정리한 다이어리
+
 
 
 <h1> java-diary </h1>
