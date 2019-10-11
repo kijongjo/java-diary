@@ -149,7 +149,34 @@ IDE(통합개발환경) 툴보다 더 발전된 형태
 IDE의 종류 3가지 
 netBeans 무료 
 eclipse  무료
-inteliJ  유료
+inteliJ  유료가 있다.
+
+
+환경변수- 시스템에 
+CLASSPATH
+. 
+입력
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+IDE-ECLIPSE 설치하기 
+
+다운로드 패키지로 다운받기 (기업용) >C디스크설치>ECLIPSE 크릭 WORKSPACE 폴더를 ECLIPSE 폴더에 생성 후 실행한다.
+
+CREATE A PROJECT>JAVA PROJECT>BASIC>FINISH버튼>PERSPECTIVE 클릭
+
+
+SRC소스 
+
+자바 프로그램은 class 단위로 만들게 된다.
+
+src>new>class생성>Hello 입력>Hello.java가 생성된다.
+----------------------------------------------------------------------------------------------------------------
+Hello class
+package basic;
+
+
 
 
 
