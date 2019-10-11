@@ -1,0 +1,40 @@
+ex)
+
+
+
+package basic;
+
+public class Hello {
+      public static void main (String[]args) {
+    	 System.out.println("Hello World");         
+       
+      }
+}
+
+
+
+
+
+
+*위 각각의 문장은 기능별로 구성된 것이다 .
+
+public static void main (String[]args)  <-main method: 자바 용응프로그램의 시작이자 끝
+      
+
+System.out.println                       <-  표준 출력장치
+    
+
+System.out.println("Hello World");       <--  "Hello World"를 출력하라.
+
+------------------------------------------------------------------------------------------------------------------------
+
+상단에 플레이 버튼
+
+or 
+우측 마우스 run as>java application 클릭 
+
+or 
+crtl +F11
+
+
+
