@@ -354,8 +354,7 @@ int b=20;
 System.out.println("a+b" + (a / b));결과는 0이다 
 원래는 소수인 0.5가 정확하지만 정수형끼리 계산하면 정수형의 형태로 보여져야한다.
 
-*float과 int가 만나면 같으 byte 크기이지만 float으로 변환이 일어난다.
-
+*float과 int가 만나면 같은 byte 크기이지만 float으로 변환이 일어난다.
 ex)
 int total = kor + eng + mat;
 		// 출력 총점 문자와 총합
