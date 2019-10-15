@@ -88,7 +88,7 @@ public class StatementEx8 {
 		//변수 
 		int score = sc.nextInt(); //위의 sc 명령어 에서 int형만 가져온다는 명령어 문자를 가져오면 에러가 뜨도록 되어있다
 		//출력
-		System.out.println("score:" + score); // ascii코드로 변환하지않고 바로 가져옴
+		System.out.println("score:" + score); // ascii코드로 변환하지않고 바로 가져옴 효율이 좋다.
 	}//method 닫음
 }//class 닫음
 
