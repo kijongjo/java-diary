@@ -5,7 +5,7 @@ while문                    while(조건 참 실행 거짓 비실행){문장1; �
 do{}while문                do {문장1; 문장2;}while(조건 실행한 다음 조건 만족하면 다시 반복, 만족하지 않으면 탈출);
 반복문 비교                for while 상황에따라  while do while 실행횟수에 따라
 중첩                       반복문을 중첩하는것 반복문{반복문{}}
-조건 분기문               if(조건){문장1,2}else{문장3,4}
+조건 분기문               if(조건){문장1,2}else{문장3,4}  swtich(사용자입력){case 숫자 break; default 숫자 break;}
 제어문이란?
 문장의 흐름을 제어한다. 제어문 카테고리에 반복문이 속하고 있다.
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -134,8 +134,52 @@ public class StatementEx6 {// main method 시작
 
 }
 
+------------------------------------------------------------------------------------------------------------------------------
+switch case문
+ swtich(사용자입력){case 숫자 break; default 숫자 break;}
+ 
+ 사용자 입력창에서 점수 혹은 어떠한 문자를 입력하게 되면 
+  case에서 그것에 맞는 것을 찾아본후 특정 지점부터 끝까지 출력을 하게 된다 .
+  끝까지 출력하는 것을 막기위해 case마다 break를 사용해 막을 수도 있다. 
+  또한 case의 경우엔 그 언저리 값은 같다고 보지 않고 정확하게 같은 값만 적용하기 때문에
+  수의 경우엔 점수/10을 해주어 그 몫으로 case를 지정해 언저리 값들을 포함시킨다.(int 값들의 나눗셈들은 int로 정수로 나온다.) 
+  default는 case로 지정하지 않은 그 이하의 값들은 모두 하나로 출력하도록 만든 것이다.
+  
+  
+ex)
+import java.util.Scanner;
 
-	
+//switch case문
+public class StatementEx9 {
+	public static void main(String[] args) {
+		System.out.println("성적입력:");
+		Scanner sc = new Scanner(System.in);
+		int score = sc.nextInt();            // 문자 읽어오는것은 next
+        //if else로도 얻을 수 있음.
+		switch (score) { // <- switch(입력값[스위치]){조건에따른 결과값}
+		case 100:        // case 10:         // <- 계속 실행하는 것을 막기위해 break 명령어 사용 
+			         //명령어중 아래 출력문장은 99와 같으니 case10만 입력해도 된다.
+			System.out.println("A학점"); // 99입력하면 CASE99로 가서 A학점 뽑고 그 밑으로 계속 실행하게 된다. 결과값 성적입력 99 A학점 B학점
+			break;   // <- 계속 실행하는 것을 막기위해 break 명령어 사용
+		case 99://case 9:
+			System.out.println("A학점"); // <-점수가 무엇이냐에 따라 값이 다르게 하는것
+			break;
+		case 80://case8:
+			System.out.println("B학점"); // 하지만 98점은 안나온다 즉 스위치문은 점수가 딱 case에 맞는 것만 나온다.
+			break;                      // 이를위해 score를 /10을 하게되면 몫은 9 ,10 8 등이 되는데 이를 이용해 범위를 지정할 수있다.
+			                            // 93/10 은 java에선 인트끼리의 계산이기 때문에 9이다.
+		
+		default:
+			System.out.println("F학점"); // case이외의 것들은 default 값으로 정의 내려버릴 수있다.
+		   break;
+		
+		}
+
+	}
+}
+
+  
+  
 
 
 
