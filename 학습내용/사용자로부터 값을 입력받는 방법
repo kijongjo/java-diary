@@ -1,0 +1,98 @@
+요약
+사용자로부터 값을 입력받는 방법1       import java.io.IOException; throws IOException System.in.read();   
+사용자로부터 값을 입력받는 방법2       import java.util.Scanner;Scanner sc = new Scanner(System.in);int score = sc.nextInt();
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+사용자로부터 값을 입력받는 방법 1
+  import java.io.IOException; throws IOException System.in.read();   
+기본적으로 사용자로부터 값을 입력받아서 출력을 하는데 
+System.out.println()                          <-모니터 표준 출력 장치 
+System.in.read()                              <-키보드  표준 입력 장치로부터 값을 입력받아 가져오라는 명령어이다.
+
+
+하지만 이러한 명령어를 쓰기 위해선 몇가지 명령어를 특정 위치해 입력해 두어야 한다. 
+
+최상단 pakage 아래에 
+
+
+import java.io.IOException;를 
+
+입력 
+
+main method 명령어 바로 옆에
+
+
+throws IOException를
+
+입력 해준다 .
+
+ex)
+package day03;
+
+import java.io.IOException;
+public class StatementEx5 {
+
+	public static void main(String[] args)throws IOException {
+    
+   //사용자로부터 값을 입력 받아서 출력
+		System.out.print("몇단?:");
+	 //표준입력장치로부터 값을 입력받아 가져오기
+		int dan =System.in.read();
+	 //0:48,A:65, a:97
+		System.out.println("사용자가 입력한값:"+dan);
+	 // 결과가 나오는 창에 직접 값을 입력하게 되면 사용자가 입력한 값에 ascii코드 값으로 나오게된다 .
+	 // 0의 ascii코드:48이므로 빼주기 위해 48을 넣는다.(숫자의 변환을 위해서만 적용)
+    dan -=48; 
+
+		
+		for(int i =1;i<=9;i++) {
+			System.out.println(
+					dan+"*"+i+"="+dan*i );
+			
+		}// for문 end
+		
+	}// main method end
+
+}//class end
+
+==============================================================================================================  
+사용자로부터 값을 입력받는 방법 2
+Scanner
+
+Package 아래에 
+import java.util.Scanner
+main method {Scanner scan = new Scanner(System.in);     <-사용자로부터 숫자를 읽는 옵션
+}
+Scanner sc = new Scanner(System.in);                    <-위의 sc 명령어에서 int형만 가져온다는 명령어이다.
+
+
+ex)
+
+package day03;
+
+import java.util.Scanner; // 사용자로부터 숫자를 읽는 옵션 이걸 옵션을 넣어주라
+
+//사용자로부터 값을 입력받는 방법  두번째
+public class StatementEx8 {
+	public static void main(String[] args) {//main method 명령어
+		//출력
+		System.out.println("성적입력:");
+		// 사용자로부터 숫자를 읽어옴 스캐너의 기능
+		Scanner sc = new Scanner(System.in); // 사용자로부터 숫자를 읽는 옵션
+		//변수 
+		int score = sc.nextInt(); //위의 sc 명령어 에서 int형만 가져온다는 명령어 문자를 가져오면 에러가 뜨도록 되어있다
+		//출력
+		System.out.println("score:" + score); // ascii코드로 변환하지않고 바로 가져옴 효율이 좋다.
+	}//method 닫음
+}//class 닫음
+
+결과값
+성적입력:
+5
+score:5
