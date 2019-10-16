@@ -2,13 +2,10 @@
 사용자로부터 값을 입력받는 방법1       import java.io.IOException; throws IOException System.in.read();   
 사용자로부터 값을 입력받는 방법2       import java.util.Scanner;Scanner sc = new Scanner(System.in);int score = sc.nextInt();
 
+
+
+
 ----------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
 사용자로부터 값을 입력받는 방법 1
   import java.io.IOException; throws IOException System.in.read();   
 기본적으로 사용자로부터 값을 입력받아서 출력을 하는데 
