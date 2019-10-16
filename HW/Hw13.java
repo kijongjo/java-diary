@@ -6,9 +6,9 @@ public class Hw13 {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-        
+		int coin = sc.nextInt();
 	  System.out.println("¿‹µ∑ ¿‘±›:");
-	  int coin = sc.nextInt();
+	  
 	  int M500 = coin/50000;
 	  int M100 = coin%50000/10000;
 	  int M50  = coin%10000/5000;
