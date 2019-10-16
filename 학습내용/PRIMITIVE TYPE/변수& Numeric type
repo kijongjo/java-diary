@@ -11,6 +11,15 @@
 자료형 연산의 특징         int이하의 자료형끼리 연산하면 결과는 int형이 된다. 
 *출력시 중요 약속          숫자+숫자 ==>숫자 , 문자+숫자==>문자
 
+Java Data Type 
+ㄴ Primitive Type
+    ㄴ Boolean Type(boolean)
+    ㄴ Numeric Type
+        ㄴ Integral Type
+            ㄴ Integer Type(short, int, long)
+            ㄴ Floating Point Type(float, double)
+        ㄴ Character Type(char)
+
 
 
 
