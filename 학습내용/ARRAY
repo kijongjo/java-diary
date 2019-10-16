@@ -1,4 +1,12 @@
-2.reference type 변수
+요약
+array정의            변수의 반복사용을 효율적으로 줄이는 기능
+변수와 배열 비교      stack과 heap
+array 선언           자료형[] 변수명 또는 자료형 변수명[] 정의, 변수명 = new 자료형[n]
+array와 반복문       FOR(조건){m[i] = for문의 변수를 이용한 수식}
+
+2.reference type 
+
+
 array란?
 변수를 하나씩 대입하고 하나씩 출력해 반복하는 일을 
 효율적으로 처리할 수 있도록 하는 기능.
