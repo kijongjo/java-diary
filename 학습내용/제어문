@@ -6,6 +6,7 @@ do{}while문                do {문장1; 문장2;}while(조건 실행한 다음 
 반복문 비교                for while 상황에따라  while do while 실행횟수에 따라
 중첩                       반복문을 중첩하는것 반복문{반복문{}}
 조건 분기문               if(조건){문장1,2}else{문장3,4}  swtich(사용자입력){case 숫자 break; default 숫자 break;}
+break와 continue          if(조건) break; if(조건) continue; if(조건) continue  
 제어문이란?
 문장의 흐름을 제어한다. 제어문 카테고리에 반복문이 속하고 있다.
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -177,9 +178,50 @@ public class StatementEx9 {
 
 	}
 }
+---------------------------------------------------------------------------------------------------------------
 
-  
-  
+break와 continue          
+if(조건) break; if(조건) continue; if(조건) continue ;  if(조건) break 라벨;
 
+4가지가 존재한다 
+if(조건) break;
+for{
+for{
+if() break 에서 조건에 맞추어 break가 발동되면 break가 포함되어있는 가장 작은 for문을 탈출하게 된다 .
+   }
+}
 
+if(조건) continue;
+for{
+for{
+if() continue 에서 조건에 맞추어 continue가 발동되면 그 조건에 맞는 부분의 명령어만 제외되고 나머지가 출력된다.
+   }
+}
 
+if(조건) continue 라벨
+라벨
+for{
+for {
+if()continue 라벨 에서 조건에 맞추어 continue가 발동되면 그 부분을 건너뛰고 명령어의 눈은 for문의 첫번째를 읽게 된다 .
+    }
+}
+
+ex)
+jay
+   조건  i(jay label)  ==  j
+         1                1 x <-조건 만족
+         1                2 x <- 출력안하고 
+	 2                1 o <-i가 바로 바뀌게된다
+   
+if(조건) break; 라벨
+continue label과 같은데
+조건을 만족하게 되면 아예 멈추게 된다 
+
+예 
+    i(jay label) == j 
+    1               1x   <-조건을 만족
+    1               2x  <- 
+    1               3x
+    
+    
+    
