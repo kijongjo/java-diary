@@ -1,7 +1,7 @@
 package day05;
 
 //pakage 열음
-public class Hw02_day06 {// class 열음
+public class Hw02_day05 {// class 열음
 	public static void main(String[] args) {// method 열음
 		// 배열 선언 크기는 행 4 열 3
 		int[][] m = new int[4][3];
