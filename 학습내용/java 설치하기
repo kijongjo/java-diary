@@ -92,7 +92,9 @@ java 환경설정
 2. 환경변수 설정                           <-어디에서든 javacompiler를 사용할 수 있도록 환경을 설치하는 것
  컴퓨터 속성 >고급> 환경변수 설정 >시스템 변수> path의 변수값 맨 앞에 C:\Program Files\Java\jdk1.8.0_221\bin;를 추가해준다/
 C:\Program Files\Java\jdk1.8.0_221\bin;+기존의 주소
-
+*JRE와 JDK차이 
+JAVA RUNTIME ENVIRONMETN 와 JAVA DEVELOPEMENT KIT이며 
+JDK는 개발 KIT를 가지고 있고 JRE를 포함하고 있다. 
 
 
 
@@ -162,7 +164,7 @@ CLASSPATH
 --------------------------------------------------------------------------------------------------------------------------
 IDE-ECLIPSE 설치하기 
 
-다운로드 패키지로 다운받기 (기업용) >C디스크설치>ECLIPSE 크릭 WORKSPACE 폴더를 ECLIPSE 폴더에 생성 후 실행한다.
+다운로드 패키지로 다운받기 (기업용) >C디스크설치>ECLIPSE 릭 WORKSPACE 폴더를 ECLIPSE 폴더에 생성 후 실행한다.
 
 CREATE A PROJECT>JAVA PROJECT>BASIC>FINISH버튼>PERSPECTIVE 클릭
 
