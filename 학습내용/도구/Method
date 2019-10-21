@@ -1,0 +1,257 @@
+
+메소드란?
+필드가 물체의 상태라면, 물체의 행동에 해당하는게 메소드
+사람이 각각 이름과 성격이 있고 몸을 움직이는 것도 있는 것처럼 행동을 뜻함.
+메소드는 입력값이 있고, 그 입력값을 받아서 무언가 한 다음 결과를 도출해 내는 수학의 함수와 비슷한 개념이다.
+
+이때 입력값을 매개변수라고 하고,결과값을 리턴값이라고 한다. 
+◦인자( Argument ) 는 어떤 함수를 호출시에 전달되는 값을 의미한다. 
+◦매개 변수( Parameter ) 는 그 전달된 인자를 받아들이는 변수를 의미한다.
+•메소드란 클래스가 가지고 있는 기능이다. 클래스 안에 선언된다.
+
+-------------------------------------------------------------------------------------------------------
+반복 사용하는 코드에 별칭달고 불러오기 
+static void 이름(){ 자주 쓰는 코드;}
+
+쓰고 싶은 위치에
+
+불러오는 코드는 이름();
+
+코드가 main method에 200line 300line이 되어도 간결하게 쓸 수있게 만든다.
+
+
+ex)
+public class MethodEx1 {                        <-class 안에는 있어야한다.
+
+
+
+static void printStar() {                       <- 자주쓰는 코드를 밖으로 빼서 이름을 붙임.
+	  int cnt =3                                  
+    String str = "";  
+		for (int i = 0; i < cnt; i++) {             <-좀더 유연하게 하기위해 i의 범위를 cnt로 바꿈               
+			str += "*";                               
+			System.out.println(str);
+	
+  
+     }
+	}
+
+public static void main(String[] args) {         <-main method 
+
+printStar();                                    <- 검색기가 위로가서 실행한 후에 실행 후 다시 돌아온다.
+printStar();
+
+
+
+
+     }
+}
+
+----------------------------------------------------------------------------------------------------------
+매개변수(=인자,아규먼트)
+원하는 곳에 디테일한 주문을 할수 있도록 해주는 변수 매개변수가 사용되는 코드는 함수처럼 사용될 수 있다. 
+static void printStar(매개변수){코드 내용}
+
+
+printStar();         <-3줄짜리별
+printStar();        <-5줄 짜리별
+printStar();        <-7줄 짜리별 등으로 유연하게 하는 방법 ?
+
+printStar(3);
+printStar(5);
+printStar(7);  등으로 괄호안에 주문하고싶은 디테일한 명령어를 받을 수 있도록 명령어를 처리해줘야한다.
+
+
+printStar(3);  3이라는 값을 담을 수 있도록 ()안에 그릇을 두어야 한다 .
+
+main method 밖에 자주쓰는 코드 작성시 ()안에 변수를 넣어준다. 
+static void printStar(int cnt){                               <-변수를 넣은 모습.안에는 변수 선언 빼주어야한다.                     
+    String str = "";  
+		for (int i = 0; i < cnt; i++) {                         
+		str += "*";                               
+		System.out.println(str);
+	
+  
+     }
+
+
+ex)
+
+
+	static void printv(int cnt) {
+		for (int i = 1; i < 2; i++) {
+			System.out.println(cnt + "단");
+			for (int j = 0; j < 9; j++) {
+				System.out.print(cnt * j + "\t");
+			}
+                System.out.println();
+		}
+	}
+
+
+*method 구분?
+이름() 형식은 method라고 한다 ()를 써야한다.
+----------------------------------------------------------------------------------------------
+매개변수 2개 넣기 
+static void 이름(매개 변수,매개변수){코드내용}
+이름(매개변수,매개변수)
+
+ex)
+static void printCode(String cnt,int cyt) {             <-매개변수를 2개를 넣어도 가능하다 .
+		for (int i = 0; i < cyt; i++) {
+			for (int j = 0; j < i; j++) {
+				if (cnt == "+") {
+					System.out.print('+');
+				} else if (cnt == "-") {
+					System.out.print('-');
+				}
+
+			}
+			System.out.println();
+		}
+	}
+
+
+printCode("+",10);
+		printCode("-",20);
+
+
+-------------------------------------------------------------------------------------------------------
+return 하기
+static +리턴한 값의 자료형 + 메소드명(자료형 매개변수명,자료형 매개변수명){   }
+return은 method에 의해 불려진 값을 출력하지 않고 다른 변수에 대입해 또다른 계산을 위해 
+사용하기 위함이다. 
+
+
+*앞에 붙는 명령어 형식중 void란?
+이 메소드를 실행 한 후 호출한 쪽으로 아무값도 리턴할 필요 없다는 것을 말한다.
+
+ex)
+static int minus(int v1, int v2){   System.out.println(v1-v2); //<- void 로하고 return을 없애면 아래에 값을 출력할 수는 있어도 값을 다른
+ return v1-v2;                                                      변수에 대입할수없다.
+ } 
+ 
+
+
+
+
+
+
+
+
+주의사항 
+1.return 하기위해 void대신 자료형을 쓰면 반드시 return 하는 값이 있어야만 한다 .
+if문에서 if(조건){return 명령어} else{ }  else에 아무것도 쓰지 않으면 오류가 난다.
+
+2. return은 더이상 실행하지 말고 이값을 가지고 돌아가란 말이기 때문에 
+   특정 조건을 만족해 return하게 되면 아래의 명령어는 실행 조차 하지 않는다 .
+   
+
+ex)
+if (v1 > v2) {
+			return v1;
+		} else if (v1 == v2) { // <- 때문에 else if(v1 == v2){ } (아무것도 하지 않음)이 안되는 이유도 return하는게 무조건 있어야하기 때문이다.
+			return v2; 
+		} else { return v2;    <-전부 return되는것을 써주어야 한다. 
+    
+		}
+	}
+  
+ * 만약 return한 값을 가지고 돌아가는데  
+ 위의 명령어에 if명령어를 하나 더써주면 return 해서 가지고 가는 값이 중복되기때문에 아래에 쓰게 되는
+ if는 오류가 뜨게 된다.
+ 
+ ex)
+ 
+ if (v1 > v2) {
+			return v1;
+		} else if (v1 == v2) { // <- 때문에 else if(v1 == v2){ } (아무것도 하지 않음)이 안되는 이유도 return하는게 무조건 있어야하기 때문이다.
+			return v2;
+		} else {
+			return v2;
+		}
+	if (v1 > v2) {              <-오류가 뜨게 된다.
+			return v1;
+		} else if (v1 == v2) 
+			return v2;
+		} else {
+			return v2;
+		}
+		 
+   
+*method의 구조? 
+method signatuer{method body}로 이루어져 있다. 
+
+*내가 불러오고 싶은 method 구분 방법? 
+java에선 method를 불러오려고 하면 method signature에 따라 구분해 가져오게된다
+ 구조 method signature{method body}\
+   매개변수가 2개니 3개니, 그리고 int,int니 int float이니 등 method signatuer에 따라 구분한다. 
+   
+   ex)
+   int result3 = max(100, 200);
+		System.out.println(result3);
+
+		int result4 = max(100, 200.0f);                    // <- 이름이 똑같지만 int float 이라 위의 int int와는 달라 signauter로 구분하는 
+		                                                   // method 구분 방법에 따라 다른것으로 인식하게 된다 다른걸 부른 것이다.  
+ 
+
+--------------------------------------------------------------------------------------------------------
+형변환하기 
+int result4 = max(100, 200.0f);에 대해서
+
+
+
+static int max(int v1, float v2) {
+
+if (v1 > v2) {
+			return v1;
+		} else if (v1 == v2) { 
+			return (int)v2;
+		} else {
+			return(int) v2;              <-return값이 int가 되도록 형변환을 해주어야한다.
+		}
+		
+	}
+----------------------------------------------------------------------------------------------------------
+지역변수 
+{ }안에서만 의미가 있고 밖을 넘어가게 되면 의미가 사라지는 변수를 말한다.
+매개변수는 모두 지역변수이다. 
+
+
+
+static int max(int x1, int x2,int x3, int x4 )
+	{	 x1=x1+1;                                  <-method 안에서의 변수는 지역변수라 여기를 벗어나면 없어진다.
+	return x1+x2+x3+x4;}                           때문에 main method에서 sysout {x1}을 해주면 101이 아닌 100이 나오는 이유이다.
+	                                              
+
+main method
+int x1=100, x2=200,  x3=400, x4 = 600;
+		
+		int result6 = max(x1,x2,x3,x4);               
+		System.out.println("result6 : " + result6 );
+    System.out.println(x1);                        <- 101이 아닌 100이 나오는 이유는 method 변수는 지역변수이기때문이다.
+                                                       { }안을 벗어 났기 때문.
+                                                      
+   ------------------------------------------------------------------------------------------------------
+   overloading 
+  overloading 하는 방법: 이름은 같게 매개변수의 갯수 순서 타입을 다르게하면 된다. 
+  overloading이란 이름은 같고 매개변수는 다르게 만드는 것을 method overloading이라 한다. 
+   (=다중 정의 :같은 단어가 상황에 따라 달리 쓰이는것. (집에간다, 맛이간다.) 
+		                                             즉 하나의 method가 상황상 다르게 쓰인다.)
+                                                 
+   *overloading을 하는 이유 ?
+   
+   System.out.println(100);
+	 System.out.println(100.0f);
+	 System.out.println("java");
+	 overloading하는 간단한 이유는 method를 쓰는 사람이 같은 느낌으로 편하게 쓰라고 만드는것
+	 method 이름을 기억하기 쉽도록하기 위해 .
+	 method의 내용은 달라도 이름은 같게해 ( )안에 아무거나 넣어도 method중에 아무거나 걸리도록 만들어 두번생각하는 일이 없도록함.
+	 
+	 *java의 overloading
+   java+100 <-연결연산자가 되는것처럼 연산자 overloading도 java는 +만 가능하게 해놓앗다.
+	 문자+숫자 <-연결연산자
+	 숫자+숫자 <-산술 연산자
+	                                
+   
+
