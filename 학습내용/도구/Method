@@ -252,6 +252,37 @@ int x1=100, x2=200,  x3=400, x4 = 600;
    java+100 <-연결연산자가 되는것처럼 연산자 overloading도 java는 +만 가능하게 해놓앗다.
 	 문자+숫자 <-연결연산자
 	 숫자+숫자 <-산술 연산자
-	                                
-   
+
+*method 구분방법?
+method 안의 매개변수의 갯수,순서에 따라 구분
+method 헤더 부분의 데이터 종류 선언에 따라 구분.
+
+‐-------------‐------------ ‐------------ -------------‐------------ ‐-----------
+call by value 와 call by reference
+
+call by value는 method에서 값만 호출에 적용하는 것으로 main method에 해당하는 변수들의 정보엔 변경
+사항이 없다.a>b -> a>b
+call by reference는 mrthod안에 실제 주소를 전달하여 원본의 내용을 변경하여 method안에서 이루어지는 관계도
+변경시키는 것이다. a>b ->a<b 변경
+이점은 main method안에 있는 변경시킨다는method 명령어만 지우게 되면 다시 원본으로 되돌릴 수
+있다는 것이다.
+
+
+method를 통해 원본 수정	                                
+
+
+ex)
+static int alpenglow(int a){
+int[]b = b[4];
+b[4]=100;           <- 100으로 4번째 인덱스 수정
+
+return b}
+
+
+
+main{
+alpenglow(100)}
+를 하게 되면 main method에서 method 이후로
+적혀지는 관련된 명령어에 대해서는 수정된 값으로 고려되어 계산이 이루어진다.
+-
 
