@@ -22,6 +22,70 @@ class이름 객체이름 = new class이름(); <- 객체가 생성된다.
 
 
 ex)
+package day08;
+
+public class Marine {
+	// member 변수,필드
+
+	int hp, x, y;
+	int 사거리, 공격력, 방어력, 공격속도;
+	int 이동속도;
+
+	// 생성자
+	// class 명과 똑같은 이름을 가지는 것
+	// 객체의 초기화를 담당(변수의 초기값들을 미리 지정한다.)
+	// 리턴값은 없지만 void라는 키워드 사용하지 않는다.
+	// void가 있으면 생성자가 아니라 일반 메소드가 되어버린다.
+	Marine() {// 매개변수가 없는 생성자 .
+		hp = 200;
+		x = 1;
+		y = 2;
+		공격력 = 8;
+		공격속도 = 20;
+		방어력 = 0;
+		사거리 = 10;
+		이동속도 = 12;
+
+	}
+
+	Marine(int a) {// 매개변수에 값을 넣으면 특정 요소가 변하도록 설정.
+		hp = a;
+		x = 1;
+		y = 2;
+		공격력 = 8;
+		공격속도 = 20;
+		방어력 = 0;
+		사거리 = 10;
+		이동속도 = 12;
+		System.out.println("매개변수 있는 생성자");
+	}
+
+	void 공격하기() {
+		System.out.println("두두두");
+	}
+
+	void 이동하기() {
+		System.out.println("gogogo");
+	}
+
+	void 정지() {
+		System.out.println("정지..");
+	}
+
+	void 스팀팩() {
+		System.out.println("스팀팩");
+	}
+
+	void 상태보기() {
+		System.out.println("------------");
+		System.out.println("체력" + hp);
+		System.out.println("x" + x);
+		System.out.println("y" + y);
+		System.out.println("공격속도:" + 공격속도);
+
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class TestMain3 {
 	public static void main(String[] args) {
