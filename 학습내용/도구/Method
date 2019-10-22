@@ -1,9 +1,9 @@
-메소드 정의
-return
-지역변수
-overloading
-call by value
-
+메소드 정의     static void  이름(){ 자주 쓰는 코드;} 
+return         static 자료형 이름(){ 자주 쓰는 코드 +return 내용;}
+지역변수        method 안에서만 존재하는 변수이면 {}으로 나가면 사라짐
+overloading    같은 이름의 method. 변수의 갯수 순서 자료형타입에 의해 구분한다.
+call by value  원본에 영향 안주고 계산된 값만 돌려줌
+call by reference 원본을 변화시킴.
 
 메소드란?
 필드가 물체의 상태라면, 물체의 행동에 해당하는게 메소드
@@ -263,7 +263,7 @@ int x1=100, x2=200,  x3=400, x4 = 600;
 method 안의 매개변수의 갯수,순서에 따라 구분
 method 헤더 부분의 데이터 종류 선언에 따라 구분.
 
-‐-------------‐------------ ‐------------ -------------‐------------ ‐-----------
+‐-------------‐-------------‐--------------------------‐-------------‐---------------------------------
 call by value 와 call by reference
 
 call by value는 method에서 값만 호출에 적용하는 것으로 main method에 해당하는 변수들의 정보엔 변경
@@ -278,16 +278,17 @@ method를 통해 원본 수정
 
 
 ex)
-static int alpenglow(int a){
-int[]b = b[4];
-b[4]=100;           <- 100으로 4번째 인덱스 수정
+static void alpenglow(int[]a){
 
-return b}
+a[1]=100;           <- 100으로 4번째 인덱스 수정
+
+}
 
 
 
 main{
-alpenglow(100)}
+int [] m = {100,200};
+alpenglow(m)}
 를 하게 되면 main method에서 method 이후로
 적혀지는 관련된 명령어에 대해서는 수정된 값으로 고려되어 계산이 이루어진다.
 -
