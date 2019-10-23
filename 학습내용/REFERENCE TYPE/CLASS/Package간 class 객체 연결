@@ -1,0 +1,6 @@
+다른 package에서 class 정보를 가져와 객체를 만들고자 한다면 
+import package 이름.CLASS 이름 ; 
+   OR 
+단축키 CTRL+SHIFT+O
+   OR
+package 이름.class 이름 +객체이름 = new class이름();
