@@ -33,3 +33,9 @@ ex)
 public String getName() {
        return this.name;
     }
+
+결과를 출력할 때에는 
+ex)
+ Marine Marine1 = new Marine();  //day08의 Marine생성자에  pubilc
+	    atm.setName("조기종");
+	    System.out.println(atm.getName());
