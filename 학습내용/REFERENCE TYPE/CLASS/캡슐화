@@ -1,0 +1,35 @@
+캡슐화란?
+객체를 안전하게 감싸서 사용하는 방법. 객체 지향 언어의 특성이다. 
+만약 누군가가 나의 정보에 직접적으로 수정하게 된다면 안전성에 문제가 생길수 있다. 그것을 방지하기위한 
+일종의 장치이다. 총 3가지로 이루어져 있다.
+
+1.PRIVATE
+2.GETTER
+3.SETTER 
+
+
+적용 방법? 
+먼저 보호하고싶은 요소의 변수 앞에 PRIVATE를 지정한다.
+
+PRIVATE String name;
+
+지정 한다 음 setter와 getter를 사용하는데 
+
+setter의 경우 
+접근하려는 사람이 값을 입력하는 것을 받아오고 조건문으로 권한에 따라 수정 가능 여부를 판단후 일치한다면 
+수정하는 과정을 거친다. 
+
+ex)
+public void setName(String name){
+	
+		this.name=name;
+	}
+  
+gtter의 경우 
+바뀐 값을 다시 사용자에게 보여주도록 return해준다.
+return값은 바로 바뀌게 된 이름일 수도 있고 setter에서 권한에 준해 일부만 바뀐후의 값을 return해줄 수도 있다.
+
+ex)
+public String getName() {
+       return this.name;
+    }
