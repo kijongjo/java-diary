@@ -57,4 +57,17 @@ ex)
 public void 노래부르기() {              <-노래부르기를 노래부르자로 바꾸게 되면 에러가난다 부모 method이름이 노래부르기이기때문.
 		System.out.println("나 좋은 꿈을 꿨어요~");
 		
-		
+*overriding overloading 비교
+method overriding                                              method overloading
+
+재정의(상속)                                                           다중정의
+
+방법 
+method 명 동일                                                      method 명 동일 
+매개변수 type,갯수,순서 동일하다                                매개변수 type,갯수,순서 다르다 
+접근지정자는 부모보다 허용적이어야 한다.
+(부모=public 자식 = default x
+ 부모=defult 자식 =protected,public o)
+
+부모보다 볼수 있는 범위가 같거나 넓어야 한다. 
+부모보다 더 보호되면 불가능 하다 .		
