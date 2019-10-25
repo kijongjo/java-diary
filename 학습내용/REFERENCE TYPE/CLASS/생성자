@@ -133,7 +133,18 @@ iu.상태보기(); 를 출력하게 되면  this(매개변수)의 매개변수�
         나이:26
 
 *주의할점 
-생성자의 접근지정자가 default면 다른 package에서 객체를 초기화 할때 오류가 나온다. 
+1.생성자의 접근지정자가 default면 다른 package에서 객체를 초기화 할때 오류가 나온다. 
  Marine m = new Marine();     <- Marine class package가 A에 있고 생성자가 default면 불가 
                               <- Marine class package가 A에 있고 생성자가 PUBLIC이면가능 
+
+
+*임의로 초기화 하고 객체 만들기  
+Class 객체이름 = null; 
+
+*주의할점
+자바 언어에서 가장 빈번히 보게 되는 에러이다. 참조값이 null이라 발생한다.
+class이름 객체이름=null;
+객체이름.method(); <-에러가 난다.
+왜냐하면 객체의 주소를 보고 heap에 찾아가는것까지는 가능하나 null이 되면 heap에 찾아가도 뭘 실행해야 할지 모르게 되기 때문이다.
+
 
