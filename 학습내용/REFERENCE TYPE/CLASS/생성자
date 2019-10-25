@@ -132,5 +132,8 @@ iu.상태보기(); 를 출력하게 되면  this(매개변수)의 매개변수�
         성별:여
         나이:26
 
-
+*주의할점 
+생성자의 접근지정자가 default면 다른 package에서 객체를 초기화 할때 오류가 나온다. 
+ Marine m = new Marine();     <- Marine class package가 A에 있고 생성자가 default면 불가 
+                              <- Marine class package가 A에 있고 생성자가 PUBLIC이면가능 
 
