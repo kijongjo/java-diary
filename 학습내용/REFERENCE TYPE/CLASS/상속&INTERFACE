@@ -282,8 +282,7 @@ police class 안에
 1.Gun class를 member 변수로 지정                                     <-논리:police has a Gun
 Gun g; 
 
-2.하지만 지금 상태에서 g는 null로 참조값을 가지지 않음.                <-왜냐하면 객체의 주소를 보고 heap에 찾아가는것까지는 가능하나 
-                                                                     null이 되면 heap에 찾아가도 뭘 실행해야 할지 모르게 되기 때문이다.
+2.하지만 지금 상태에서 g는 null로 참조값을 가지지 않음.                 <-sysout 불가 
 
 3.g가 참조값을 통해 HEAP에 들어가서 무엇을 할 수있는지 알수 있도록 만들기 위해 
   set(Gun g){this.g=g;}     <- 참조값 부여됨 .  
