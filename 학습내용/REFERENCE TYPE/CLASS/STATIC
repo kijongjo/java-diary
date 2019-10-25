@@ -1,0 +1,96 @@
+STATIC이란?
+static 변수타입 변수명 
+static을 써주면 각각의 객체마다 요소를 일일이 바꾸지 않고 한번에 바꿀수 있다.
+정적변수를 말한다. 즉 객체들끼리의 공용되는 요소를 정적으로묶어서 수정이 용이하게 해놓은것 . new 안해도 쓸수있다.
+	                   
+  ex) 
+  상위 class
+  static String 제조사;
+  출력 class
+  SmartPhone sp1 = new SmartPhone();해서 sp1에 class에 있는 member변수의 요소를 생성하지 않아도 이미 
+  객체sp1을 만들면 static member변수는 안에 만들어져 있다.
+  SmartPhone.제조사 = "한입먹은사과";         <-가능
+  SmartPhone.제품명="한입먹은사과";           <-불가능
+	System.out.println(SmartPhone.제조사);     <-가능
+	System.out.println(SmartPhone.제품명);     <-불가능
+  
+ *STATIC의 메모리 저장 방식 
+ 
+정적 변수  => heap이 아닌 method area(=static area)에 static 변수가 공간이 할당된다. 
+	           여기에는 static 변수와 static method가 올라간다. 
+	           class를 읽어들이는 순간 생긴다.( heap에 안생긴다는것을 생각하자)
+             
+             
+             
+       Method area       Stack            Heap
+            □              □               □
+            ↑
+         static저장
+         
+ 
+ 
+ 정리: 
+ static 변수,static methods는 클래스 메모리 로딩중에 할당되는 변수와method new 연산자로 객체가 생성되기 전에 사용할수 있는 
+특별한 변수이다. 아직 참조변수가 없으므로 참조변수명 대신 클래스명으로 사용해서 접근가능
+    ex)SmartPhone.제조사 = "한입먹은사과";     <-SmartPhone의 객체를 이용해 불러와서 대입한게 아니라 class로 바로 대입함
+       System.out.println(SmartPhone.제조사);
+	--------------------------------------------------------------------------------------------------------------------------
+  Static Block
+  class의 변수를 출력 class에서 불러오고자 할때 class 변수가 출력 되기도 전에 먼저 출력이 되는 것을 말한다.
+  Class가 memory로 loading될 때 자동적으로 실행된다.
+  Static block은 class 내부에 여러 개가 선언되어도 상관없으며 선언된 순서대로 실행된다.
+ *주의할 점
+   1) Static block 내부에 Instance 필드나 Instance method를 사용할 수 없음
+        즉, Static block 안에서는 Static만 사용 가능
+        사용하려면 'new' 즉 객체 생성
+   2) 객체 자신의 참조인 this 키워드 사용 불가능
+   -------------------------------------------------------------------------------------------------------------------------
+   static method 
+   객체로 지정을 하지 않아도 class.method();만으로도 출력이 가능하다. 
+   
+   
+   ex)
+  class  
+  public class Test {
+	static int no;                                           <-static 변수
+     int no2;                                              <-instance
+	static {                                                 <-static block
+		int a = 10;
+		System.out.println("a : " + a);
+  }
+
+	Test() {               
+		System.out.println("기본생성자");
+	}
+
+	public static void show() {                              <-static method
+		System.out.println("static metohd show()");
+
+	}
+  
+	
+	public void show2() {System.out.println("instance method show2()");}
+  }
+
+      
+   출력 class
+   
+public class TestMain7 {
+public static void main(String[] args) {
+	 System.out.println(Test.no);                           <- 객체 생성없이 변수를 불러온다. static 변수
+	
+  
+결과값                
+a : 10                                                     <- static block이 명령어를 쓰지않았는데 이미 실행이 된다.
+0                                                             class를 불러올때 static block이 제일 먼저 실행된다.
+static method show()
+
+   Test.show();
+   System.out.println("------------------------------");
+   Test t= new Test();
+
+   System.out.println(t.no2);
+   t.show2();
+}
+}
+         
