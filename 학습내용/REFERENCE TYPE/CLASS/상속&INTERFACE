@@ -295,18 +295,91 @@ Gun g;
   get(){g.fire();}
 -------------------------------------------------------------------------------------------------------------------------------
  Class의 member 변수로써 interface를  사용하기
-class를 다른 class의 member변수로 설정. setter(class 변수이름){this.class변수 변수이름 = 변수이름 }
+상위 클래스에서
+class를 다른 class의 member변수로 설정. setter(하위class 변수이름){this.class변수 변수이름 = 변수이름 }
                                        getter(){하위클래스 변수이름.기능();}
 하위 interface class에서 
 method(){};
+하위의 하위 클래스 implements 하위 클래스 
+{@Override method{}}
 출력 class에서
-하위 클래스 객체 a 생성
+하위의 하위 클래스 객체 a 생성
 상위 클래스 객체 b 생성
-b.setter(하위클래스 객체 a);
-b.getter();
+b.setter(하위의 하위클래스 객체 a);                  <-상위 class의 setter에는 하위 class 변수이름 
+b.getter();                                          출력 class의 setter에는 하위의 하위 class 변수이름 들어감 
  
 
 위의 class를 member 변수로써 사용하는 것과 동일하다.  다만 부모 변수에 자식의 참조값을 넣을 수 있다는 원리를 추가할 뿐이다. 
 
 
 ex)
+상위 클래스
+public class Police {
+	String name, age, 계급; .
+	
+	Weapon w;                      <-interface class
+	Police() {
+		name = "포돌이";
+		계급 = "순경";
+	}
+
+	public void setWeapon(Weapon a) {this.w=a;}
+	
+	public void use() {w.use();}
+
+
+	void 체포하기() {
+		System.out.println("미란다 원칙");
+	}
+
+	void 먹기() {
+		System.out.println("도넛 먹기");
+	}
+}
+
+-----------------------------------------------------
+interface 클래스
+public interface Weapon {
+	public void use();
+
+	public void reuse();
+}
+------------------------------------------------------
+interface의 하위 클래스
+public class AK47 implements Weapon {
+
+	@Override
+	public void use() {
+		System.out.println("AK47:빵~~~");
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void reuse() {
+		System.out.println("AK47:재장전");
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
+원리:
+1. interface Weapon 설정 
+method 설정 (interface의 method는 하위 class에서 overloading을 하지않으면 오류가 나온다.)
+
+2.무기이름 implements Weapon 설정
+ overriding 해야할 method {}설정
+
+3. interface weapon을 활용하고자 하는 class의 멤버 변수로 설정한다 . 
+
+Weapon a ;(= police has a weapon) 
+4. gun을 활용하는 방식과 똑같이 사용한다. 
+
+5.호출하는 파일에서 
+쓰고싶은 무기의 객체를 Instance해 참조값을 가지게 한 후 . 
+setWeapon(Weapon w){this.w= w; }에 weapon의 하위 class 객체를 setWeapon method에  
+넣어주면  Weapon w=Weapon 하위클래스 객체가 되어 하위 class 무기를 member변수로 설정
+하지 않아도  참조값을 따라 들어가게 된다. 
+
+
