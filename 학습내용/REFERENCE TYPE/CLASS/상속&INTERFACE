@@ -158,10 +158,50 @@ method(d)
 하지만 자바는 언제나 단일 상속을 기본으로한다. 
 -------------------------------------------------------------------------------------------------------------------------------
 interface?
+상위 클래스의 경우
+public interface 클래스이름{ method();}
+하위 클래스의경우
+import package이름.class이름;                                                  <-만약 다른 package에 있을 경우 써준다.
+public class 클래스이름(하위) implements 클래스이름(상위)
+or
+public class 클래스이름(하위) extends 클래스이름(상위) implements 클래스이름(상위) <-상속과 interface를 같이 써주는 경우.
+{@Override
+ method(){};
+ }
 자바에서 다중 상속을 대체하기 위해 만든 기능
 서로 관계가 없는 물체들이 상호작용을 하기 위해서 사용하느 장치나 시스템을 말한다. 
 
 *interface특징
-상수와 추상 method로만 이루어져 있다. 즉 method body가 없어야만 한다.  
+상수와 abstracts method로만 이루어져 있다. 즉 method body가 없어야만 한다.  
+abstract를 쓰지 않아도 abstract의 기능을 가진다. 
+
+
+ex)
+상위 class
+public interface Weapon {
+	public void use();
+
+	public void reuse();
+}
+하위 class
+public class FlameThrower implements Weapon {
+
+	@Override
+	public void use() {
+		// TODO Auto-generated method stub
+		System.out.println("화염발사:푸우우우우~");
+	}
+
+	@Override
+	public void reuse() {
+		// TODO Auto-generated method stub
+		System.out.println("연료 충전중...");
+	}
+
+}
+
+
+
+
 
 
