@@ -1,0 +1,31 @@
+
+다중 상속?
+
+어떤 class가 하나의 상위 class에 속해 관계되어 있는 것이 아닌 여러개의 상위 class에 속해 관계되어 복잡한 연결을 하고 있는것. 
+하지만 java는 다중 상속이 없고 단일 상속을 기본으로 한다. 
+그래서 만든것이 interface 기능 .
+
+
+interface란?\
+interface class에서
+public interface 클래스명{}
+상위 class에서
+import interface의 package.class명
+public class class명 extends 상위class명 implements interface 클래스명{
+@Override 
+interface 클래스의 method(){쓰고 싶은 내용}
+호출하고자 하는 class에서 
+import 상위 class
+
+서로 관계가 없는 물체들이 상호작용을 하기 위해서 사용하는 장치나 시스템
+상수와 추상 메소드로만 이루어져 있다. 즉 method body를 없애고 사용해야만 한다. 
+*특징 interface는 abstract의 기능을 가지고 있다 .
+
+
+
+ex)
+
+h.fly(); 
+
+h =horse class <-포유류 class에 속해 있음
+fly()기능 = flyable class에 속해 있음
