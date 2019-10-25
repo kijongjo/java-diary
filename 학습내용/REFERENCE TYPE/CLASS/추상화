@@ -49,3 +49,11 @@ public void 먹기() {
 	// TODO Auto-generated method stub
 	 System.out.println("냠냠")
 }
+
+
+*class 정의를 위한 class에선 순서가 뒤죽박죽이여도 상관없다. 호출하는 곳에서의 순서가 중요하다 
+
+ex)
+class 정의 class    호출을 위한 class
+getter                 setter
+setter (0)             getter
