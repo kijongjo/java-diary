@@ -1,0 +1,9 @@
+import java.awt.Frame; 
+    +
+Window 기본 틀을 만드는 명령어
+setSize(가로크기,세로크기);
+setLocation(가로위치,세로위치);
+setVisible(true);
+setTitle("제목")
+*Visible을 맨 아래에 두어야 모든 옵션을 조정한 후에 보여지게 된다. 
+
