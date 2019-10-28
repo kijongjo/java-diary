@@ -7,3 +7,4 @@ setVisible(true);
 setTitle("제목")
 *Visible을 맨 아래에 두어야 모든 옵션을 조정한 후에 보여지게 된다. 
 
++super("event"); /<-부모의 매개변수있는 생성자를 부른다.  setTitle과 동일하다.
