@@ -1,0 +1,98 @@
+Object? 
+최상위 class
+"Object" 클래스의 모든 메소드는 모든 클래스에서 사용이 가능.
+
+* TOSTRING();
+"String" 클래스 객체의 "toString"메소드는 자신이 가진 값을 그대로 리턴해주고,
+"File"클래스 객체의 "toString"메소드는 자신이 가진 해당 경로값을 리턴해 준다.
+
+문자열의 참조값을 알고자 한다면
+	getClass().getName() + '@' + Integer.toHexString(hashCode())
+           = 클래스의 이름 + '@' + HASHCODE 값을 16진수로 바꾼값.	 
+를 써주는게 더 정확한 값이다 .
+
+ex )
+	System.out.println("obj1 :" + obj1);
+	System.out.println("obj1 :" + obj1.toString());  <-OBJ1을 실행하면 사실 TOSTRING이 생략된것이다.
+  
+* 클래스 이지만 PRIMITIVE TYPE 처럼 사용할 수 있는 예외적인 클래스 : STRING 
+
+------------------------------------------------------------------------------------------------------------------------
+String class의 공간 활용
+string class는 객체 선언(ex string 변수 = new string("내용");을 통한 생성과 primitive type String 변수 ="내용"을 통한 선언에 의한 
+생성에서 공간을 차지하는 것에 대한 차이가 존재한다. 객체 선언을 통한 생성 같은 경우 내용이 같더라도 각각의 참조값을 만들어 heap에 따로 따로 
+공간을 차지하여 여러개의 참조값을 가지고 primitive type으로 생성한 경우에는 같은 내용이라면 하나의 공간을 두개 이상의 객체들이 공유하여 하나의 참조값을 
+가지게 된다.
+
+
+  
+  ex)
+  String str1=new String("Java")  <-언제나 새로운 공간을 만들어 주소값을 담는다. 
+String str1=new String("Java")
+
+
+str1 #100  
+str2 #200                       <-객체를 따로 만들면 주소도 따로 된다. 
+
+
+String str1="Java";             <-primitive 처럼 선언한다. 
+String str2="Java";
+
+str1 #100 
+str2 #100                       <-공간 효율을 위해 같은 문자열을 가지면 같은 곳에 주소를 가지게 된다. 
+
+
+
+str1="ORACLAE"                  <-새로운 문자를 대입을 하면 객체를 새롭게 다시만들고 (heap에 새로운공간) 참조값을 따로 부여한다
+SYSOUT(str1);
+Sysout(str2);
+
+str1 #300
+str2 #100
+
+
+str1="sun"                      <-다시 #400이 만들어짐
+
+str1 #400
+str2 #100
+G'C  #300                       <-가비지 컬렉터에 의해 삭제 된다. 
+
+
+
+*객체선언 생성과 primitive type 생성의 차이를 알기 위한 방법 equals 사용
+if(객체명.equals(객체명2)){}
+Object 클래스:equals():동일객체인지 참조를 비교
+String 클래스:equals(): override method 주어진 문자열이 같은지 다른지 내용 비교
+
+
+
+ex)
+if (str1 == str2) {
+			System.out.println("동일");
+		} else {
+			System.out.println("다름");
+		}
+
+		 .
+		if (str1.equals(str2)) {  
+			System.out.println("O");
+		} else {
+			System.out.println("X");
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
