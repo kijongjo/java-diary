@@ -1,2 +1,25 @@
+
+
+
+
+
+
+TextField?
+멤버변수로
+TextField 변수이름 선언
+생성자(){
+변수이름 = new TextField(최대 글자수);
+add 변수 이름 
+setLayout(null)로 한경우
+변수이름.setSize등을 설정.
+
+}
+
+window화면 내에 글을 쓸 수 있는 기능을 가진 창을 만드는 것. 
 TextField();이용해 로그인 화면을 만들 수 있다. 
+
+
+
+
+
 
