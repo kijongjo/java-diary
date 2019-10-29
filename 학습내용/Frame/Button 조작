@@ -6,8 +6,157 @@ event 처리 순서?
 
 
 
-ex)
-event source : 버튼의 객체 
+
+
+
+1. event 소스를 결정.
+Button 클릭 후 .
+event source : 버튼의 객체
+
+2. event source에 감지기를 부착
 event source에 감지기를 부착: ActionListener
+스프링 쿨러에서 불을 감지하는 역할.
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 Handler 객체 = new Handler():
 버튼의 객체.addActionListener(핸들러의 객체);
+
+3. handler를 정의
+버튼을 만든 class 안에 
+class handler implements ActionListener{      <-ActionListener는 interface이기 때문이다.
+
+public void actionPerformed(ActionEvent e) {  <-ActionListener의 overriding
+		// TODO Auto-generated method stub
+		System.out.println("내용");               <-ActionListener버튼의 객체.addActionListener(핸들러의 객체)에서 명령을 받으면 반응을 한다.
+	}} 
+  
+
+
+
+*public class
+일반적으로 1개의 java 파일(~~~.java)public 클래스는 1개만 해야 한다. 그리고 
+파일명과 동일 해야한다. 그래서 handler에 public class handler라고 쓰지 않는다.
+
+
+
+ex)
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class MyWin1 extends Frame {
+	Button btn1,btn2;
+
+	MyWin1(String title) {
+		super(title); 
+		btn1 = new Button("날 클릭해봐");
+		Handler hd = new Handler();
+		// addActionListener(ActionListener 구현객체)
+		btn1.addActionListener(hd);
+		add(btn1);
+		setSize(300, 300);
+		setLocation(300, 300);
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		MyWin1 sw = new MyWin1("내가 만든 창"); 
+	}
+}
+
+
+class Handler implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("버튼 눌림");
+	}} 
+  
+  
+  
+  ---------------------------------------------------------------------------------------------------------------------------
+  배치관리자 사용하지 않고 모든 컴포넌트의 크기와 위치를 직접 지정하기
+  setLayout(null);
+  버튼의객체.setSize(가로크기,세로크기);
+  
+  ex)
+  setLayout(null);
+  Button btn = new Button();                    <-공간을 먼저 지정해주어야 setsize 설정하는것이 오류가 안난다.
+  btn.setSize(가로크기,세로크기);
+  btnYes.setLocation(가로크기,세로크기);
+  
+  
+  
+  *button이 아닌 label 달기 
+  import java.awt.Label;
+  
+  
+ 생성자(){ Label lb;
+ lb = new Label("내용");
+ lb.setBackground(Color.컬러이름);
+ lb.setSize(가로크기,세로크기);
+ lb.setLocation(가로크기,세로크기);
+ add(lb);
+ }
+ 
+ 
+ ex)
+ 구구단 출력 창 만들기 
+ package Hw_day13;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Hw01_day13 extends Frame {
+	Button btn;
+
+	Hw01_day13(String title) {
+		super(title);
+		Handler1234 hd = new Handler1234();
+        Label lb;
+         lb = new Label("                      구구단 출력");
+         Button btn = new Button("출력");
+         setLayout(null);
+		lb.setSize(200,60);
+		lb.setLocation(550,200);
+		lb.setBackground(Color.GRAY);
+		btn.setSize(100,60);
+		btn.setLocation(600,300);
+		add(lb);
+		add(btn);
+		btn.addActionListener(hd);
+		// <-기본 생성자. setTitle임
+		setSize(300, 300);
+		setLocation(300, 300);
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		Hw01_day13 sw = new Hw01_day13("구구단"); // string 매개변수 있는 생성자를 만듦.
+	}
+
+	class Handler1234 implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			for (int i = 2; i < 10; i++) {
+				for (int j = 1; j < 10; j++) {
+					System.out.print(i + "*" + j + "=" + i * j+"\t");
+				}
+				System.out.println();
+			}
+
+		}
+
+	}
+}
