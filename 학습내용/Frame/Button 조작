@@ -1,0 +1,13 @@
+event 처리 순서?
+1. event 소스를 결정.
+2. event source에 감지기를 부착
+3. handler를 정의
+
+
+
+
+ex)
+event source : 버튼의 객체 
+event source에 감지기를 부착: ActionListener
+Handler 객체 = new Handler():
+버튼의 객체.addActionListener(핸들러의 객체);
