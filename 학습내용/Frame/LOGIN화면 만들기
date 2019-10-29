@@ -1,10 +1,5 @@
-
-
-
-
-
-
 TextField?
+import java.awt.TextField;
 멤버변수로
 TextField 변수이름 선언
 생성자(){
@@ -18,8 +13,289 @@ setLayout(null)로 한경우
 window화면 내에 글을 쓸 수 있는 기능을 가진 창을 만드는 것. 
 TextField();이용해 로그인 화면을 만들 수 있다. 
 
+*컴포넌트의 크기와 위치를 한번에 조정하기 
+하고싶은객체.setbounds(x,y,width,height);
+*비밀번호를 '*'로 보여주도록 하기
+TextField변수이름.setEchoChar('*');
+*글자 font 바꾸기 
+import java.awt.Font;
+Font 변수이름 = new Font("글꼴", Font.글자체, 크기);
+*주의 할점 
+instance 후에 add등의 명령어를 추가해야한다. 
+add후 instance를 하게 되면 에러가 발생한다.
+*System.exit(0);
+
+-----------------------------------------------------------------------------------
+로그인 혹은 reset 버튼을 눌렀을 때 특정 반응을 하도록 만들기 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+생성자(){
+버튼변수이름.addActionListener(handler 변수);
+class 선언 
+class Handler이름 implements ActionListener{
+@Override
+public void actionPerformed(ActionEvent e)           <-ActionEvent e에는 handler변수가 들어간다.
+String cmd = e.getActionCommand();                   <-getActionCommand는 버튼의 이름을 그대로 cmd에 대입해준다.
+if(cmd.equals("로그인")){                            <-string의 문자열비교
+특정 행동 
+}else if(cmd.equals("reset")){
+특정 행동}
+
+}
+
+*getText();와 setText(); 
+라벨 또는 텍스트필드.getText();
+라벨 또는 텍스트필드.setText("내용");
+get은 윈도우 창 내에 라벨 또는 텍스트필드에 써진 내용을 가지고 오는것. 
+set은 윈도우 창 내에 라벨 또는 텍스트필드로 쓴 내용을 보내는 것.
+Handler 클레스에서 특정행동에 사용한다. 
+
+ex)
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class LogIn extends Frame {
+Button btnLogin, btnReset;
+TextField tfId, tfPw ;
+LogIn(String title) {
+      btnLogin = new Button("로그인");
+      btnReset = new Button("Reset");
+      Handler3 hd = new Handler3();
+		add(btnLogin);
+		add(btnReset);
+    add(tfId);
+		add(tfPw);
+      btnLogin.addActionListener(hd);
+		  btnReset.addActionListener(hd);
+    }
+
+class Handler3 implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String cmd = e.getActionCommand();
+			if (cmd.equals("로그인")) {
+
+			String id =	tfId.getText();
+								
+            String pw = tfPw.getText(); 
+            System.out.println("id: "+id+"pw: "+pw);
+			} else if (cmd.equals("Reset")) {
+				System.out.println("종료합니다.");
+				System.exit(0); // 정상 종료
+				tfId.setText("        ");   
+				tfPw.setText("        ");
+			}
+		}
+	}
+
+------------------------------------------------------------------------------------------------------------------
+Nested Class
+import 필요한 요소;
+public class 클래스이름 extends Frame implements ActionListener{                 <-class를 하나더만들지 않고 actionListener를 추상 클래스로 붙여주었다.
+변수이름.addActionListener(this);
+@Override
+public void actionPerformed(ActionEvent e) {
+반응 인식후 할 내용
+  
+	}
+}
+handler를 하기 위해서  class 아래에 또다른 class를 만들어 일일이 불러와 연결하여 사용하거나 member변수를 다른 
+class에선 사용할 수 없기 때문에 한번더 정의를 해주어야 하는 번거로운 일이 발생한다. 그래서 효율성을 높이기위해 class안에 
+class를 중첩해 사용하는것을 Nested Class라고 한다. 
+
+------------------------------------------------------------------------------------------------------------------
+Window창을 조절하기 
+ import 필요한 요소 ;
+public class 클래스이름 extends Frame implements ActionListener, WindowListener {                <-추상 클래스 windowlistener를 추가해준다. 
+생성자(){this.addWindowListener(this);}
+
+@Override
+	public void windowOpened(WindowEvent e) {                                                     <-윈도우 창에서 이루어지는 모든 행위에 대해 조정할 수있는 method가 주어진다.
+		// TODO Auto-generated method stub	
+	}
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub	
+	}
+	@Override
+	public void windowClosed(WindowEvent e) {
+	
+		// TODO Auto-generated method stub
+	}
+  @Override
+	public void windowIconified(WindowEvent e) {	
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void windowDeiconified(WindowEvent e) {	
+		// TODO Auto-generated method stub
+	}
+  @Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+	 }
+ }
+
+----------------------------------------------------------------------------------------------------------------------------
+종합 예제)
+package Hw_day13;
+//패키지 열음
+import java.awt.Button;
+//button을 사용하기위한 import해줌
+import java.awt.Frame;
+//frame 사용을 위한 import
+import java.awt.Label;
+//label 사용을 위한 import
+import java.awt.TextField;
+//textfield를 사용하기 위한 import
+import java.awt.event.ActionEvent;
+//actionevent 를 하기위한 import
+import java.awt.event.ActionListener;
+//actionlistener를 하기 위한 import
+public class Hw05_day13 extends Frame implements ActionListener {//frame actionlistner 상속과 추상클래스
+	//라벨 텍스트필드 버튼 멤버변수 설정
+	Label L1, L2;
+	TextField TF1, TF2, TF3;
+	Button B1;
+//일반생성자 
+	Hw05_day13(String title) {
+		super(title);
+		//멤버변수 객체의 instance와 상세 옵션 설정
+		L1 = new Label("+");
+		L2 = new Label("=");
+		TF1 = new TextField();
+		TF2 = new TextField();
+		TF3 = new TextField();
+		B1 = new Button("계산");
+		add(TF1);
+		add(TF2);
+		add(TF3);
+		add(L1);
+		add(L2);
+		add(B1);
+		setLayout(null);
+		B1.setBounds(190, 200, 70, 70);
+		L1.setBounds(162, 100, 30, 20);
+		L2.setBounds(285, 100, 30, 20);
+		TF1.setBounds(60, 100, 100, 20);
+		TF2.setBounds(180, 100, 100, 20);
+		TF3.setBounds(300, 100, 100, 20);
+		setSize(500, 400);
+		setVisible(true);
+		//b1의 클릭에 따라  this에서 반응이 이어진다. 
+		B1.addActionListener(this);
+		
+
+	}
+
+	//main
+	public static void main(String[] args) {
+		Hw05_day13 hw = new Hw05_day13("계산기");
+	}//main닫음
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		//리스너에서 받은것을 cmd에 저장
+		String cmd = e.getActionCommand();
+		System.out.println(cmd);
+		String a = "";
+		String b = "";
+		int c = 0;
+		int d = 0;
+		String f = "";
+		//if문 으로 계산 a는 텍스트 필드1 b는 텍스트필드 2에서 받은 값을 대입 후 변환해 계산한다음 다시 f로 출력함
+		if (cmd.equals("계산")) {
+			a = TF1.getText();
+			b = TF2.getText();
+			c = Integer.parseInt(a);
+			d = Integer.parseInt(b);
+			f = "" + (c + d);
+			TF3.setText(f);
+      System.exit(0);
+		}//if문닫음
+
+	}//method 닫음
+}//class 닫음
+
+ex)
+배열과 for문을 이용해 생성과 조작을 동시에 하도록 하는 예제
+package Hw_day13;
+
+import java.awt.Button;
+//버튼 사용을 위한 import
+import java.awt.Frame;
+//프레임 사용을 위한 import
+import java.awt.Label;
+//라벨 사용을 위한 import
+import java.awt.event.ActionEvent;
+//액션 이벤트 사용을 위한 import
+import java.awt.event.ActionListener;
+//액션 리스너 사용을 위한 import
+public class Hw06_day13 extends Frame implements ActionListener {//frame 상속 actionlistener 추상 클래스의 인터페이스 설정
+Label[]a;//= new Label[7];
+	//버튼 설정
+	Button B1;
+//일반생성자 설정
+	Hw06_day13(String title) {
+		super(title);
+  //배열의 공간 설정
+		a = new Label[7];//Label을 따로 선언해줘서 아래쪽에 	a[i].setText("" + b);
+		//포문 작성
+		for (int i = 0; i < a.length; i++) {
+//a는 새로운 라벨 객체에 대한 생성자 생성
+			a[i] = new Label("로또번호" + (i + 1));
+			//a의 옵션 설정후 윈도우에 붙임
+			a[i].setBounds(60 + 200 * i, 500, 70, 50);
+			add(a[i]);
+
+		}//포문 닫음
+
+		//버튼 instance
+		B1 = new Button("추첨");
+
+		//붙임
+		add(B1);
+		setLayout(null);
+		B1.setBounds(190, 200, 70, 70);
+  //세부설정
+		setSize(500, 400);
+		setVisible(true);
+		//버튼 클릭시 반응 설정
+		B1.addActionListener(this);
+
+	}
 
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
 
+		// TODO Auto-generated method stub
+		String cmd = e.getActionCommand();
+//		System.out.println(cmd);
+//         System.out.println(a[0]);
+		
+	//만약 cmd의 클릭에 대한 것이 추첨과 같다면 for문 가동 
+		if (cmd.equals("추첨")) {
+			for (int i = 0; i < 7; i++) {
+				//b에 순환마다 랜덤값이 들어감
+				int b = (int) ((Math.random() * 45) + 1);
+				//라벨이 들어간 배열을 순환마다 text값을 화면에 출력한다. 
+				a[i].setText("" + b);
 
+			}//포문닫음
+
+		}//이프문닫음
+
+	}//class 닫음
+	public static void main(String[] args) {
+		Hw06_day13 hw = new Hw06_day13("로또");
+		
+	}//main닫음
+}//class 닫음
 
