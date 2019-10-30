@@ -72,6 +72,87 @@ public void mouseMoved(MouseEvent e) {
          }
     }
   
-  
+  --------------------------------------------------------------------------------------------------------------------------------------------------
+  전체 내용
+  package day14;
+
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class MovingButtonWin extends Frame implements ActionListener, MouseMotionListener {
+	Button btnYes, btnNo;
+	Label lb;
+
+	MovingButtonWin() {
+		btnYes = new Button("Yes");
+		btnNo = new Button("No");
+		lb = new Label("당신은 똑똑하다고 생각하시나요");
+		add(btnYes);
+		add(btnNo);
+		add(lb);
+		setLayout(null);
+		btnYes.setBounds(200, 400, 50, 50);
+		btnNo.setBounds(500, 400, 50, 50);
+		lb.setBounds(300, 100, 300, 100);
+		btnYes.addActionListener(this);
+		this.addMouseMotionListener(this);// 마우스 움직일때 반응하는 메소드
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				super.windowClosing(e);
+				System.exit(0);
+			}
+		});
+		setBounds(100, 100, 800, 600);
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		MovingButtonWin mbw = new MovingButtonWin();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("yes");
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		// System.out.println("마우스 드래그");
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		// yes 버튼의 좌표
+		int x = btnYes.getX() + 25; // 버튼의 좌표 너비의 절반을 더해줌. 버튼의 중앙.
+		int y = btnYes.getY() + 25;
+		System.out.println("X: " + x + "Y: " + y);
+		int mx = e.getX();
+		int my = e.getY(); // 마우스에 대한 변수 니까
+		System.out.println("마우스의 좌표: " + mx + ",y:" + my);
+		// 둘사이의 거리가 가까우면 버튼의 좌표를 변경
+		double dis = Math.sqrt((mx - x) * (mx - x) + (my - y) * (my - y));
+		System.out.println(dis);
+		if (dis < 80) {
+            int a = (int)(Math.random()*600);
+            int b =(int)(Math.random()*600);
+            btnYes.setLocation(a,b);
+			
+			
+			//랜덤으로 다른 위치로 버튼을 이동                   
+		}
+	}
+}
   
   
