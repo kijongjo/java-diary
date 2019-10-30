@@ -1,0 +1,77 @@
+기본 셋팅
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+public class MovingButtonWin extends Frame implements ActionListener{
+Button btnYes, btnNo;
+	Label lb;
+  MovingButtonWin() {
+		btnYes = new Button("Yes");
+		btnNo = new Button("No");
+		lb = new Label("당신은 똑똑하다고 생각하시나요");
+		add(btnYes);
+		add(btnNo);
+		add(lb);
+		setLayout(null);
+		btnYes.setBounds(200, 400, 50, 50);
+		btnNo.setBounds(500, 400, 50, 50);
+		lb.setBounds(300, 100, 300, 100);
+		btnYes.addActionListener(this);
+    addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				super.windowClosing(e);
+				System.exit(0);
+			}
+		});
+		setBounds(100, 100, 800, 600);
+		setVisible(true);
+	}
+  public static void main(String[] args) {
+		MovingButtonWin mbw = new MovingButtonWin();
+	}
+  
+  
+  마우스를 가져다 대면 버튼이 도망가도록 하기 위해서 window창 내에 mouse의 움직임을 읽는 추상 클래스를 추가해 주어야 한다. 
+ import java.awt.event.MouseEvent;
+ import java.awt.event.MouseMotionListener;
+ class에
+ implements MouseMotionListener
+ 
+ 생성자(){
+ this.addMouseMotionListener(this);
+ }
+ 를 하게 되면 override method로 
+ 	public void mouseDragged(MouseEvent e) {}                 <-마우스 클릭후 드래그시 무엇을 할지 
+  public void mouseMoved(MouseEvent e)   {}                 <-마우스를 움직일때 무엇을 할지 
+  가 생기게 된다.
+  
+  
+마우스를 버튼에 가져다 대면 버튼이 랜덤하게 움직여야 하니 mousemoved method에 처리를 해준다. 
+
+public void mouseMoved(MouseEvent e) {
+		
+		int x = btnYes.getX() + 주어진 넓이의 반절;       <- 버튼의 좌표 너비의 절반을 더해준다. 버튼의 중앙을 잡기 위함이다..
+		int y = btnYes.getY() + 주어진 높이의 반절;       <- 버튼의 좌표 높이의 절반을 더해준다.
+    int mx = e.getX();                               <-마우스에 대한 x좌표값을 대입한다.
+ 	  int my = e.getY();                               <-마우스에 대한 y좌표값을 대입한다.
+    
+    double dis = Math.sqrt((mx - x) * (mx - x) + (my - y) * (my - y)); <-피타고라스 정리다. 마우스가 대각선위치에 있는것을 인식할때 사용한다.
+                                                                        Math.sqrt는 주어진 식을 루트해주는 것이다.
+                                                                        
+    if (dis < 80) {                                                    <-만약 마우스가 80이하로 가까워지게 되면 버튼의 x와 y값을 랜덤으로 주어지게 한다.
+            int a = (int)(Math.random()*600);
+            int b =(int)(Math.random()*600);
+            btnYes.setLocation(a,b);
+            }
+         }
+    }
+  
+  
+  
+  
