@@ -1,0 +1,229 @@
+
+package day14;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class HwWin4 extends Frame implements ActionListener {
+	float firstNumber;
+	float secondNumber;
+	String oper = "";
+	Button bM1, bM2, bM3, bM4, bM5, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, bA1, bA2, bA3, bA4, bA5, bA6, bA7, bA8,
+			bA9, bR1, bR2, bR3;
+	Label lb;
+
+	HwWin4() {
+		super("계산기");
+		// 레이아웃초기화
+		setLayout(null);
+
+		// 컴포넌트 초기화
+		lb = new Label("");
+
+		bM1 = new Button("MC");
+		bM2 = new Button("MR");
+		bM3 = new Button("MS");
+		bM4 = new Button("M+");
+		bM5 = new Button("M-");
+
+		bR1 = new Button("←");
+		bR2 = new Button("CE");
+		bR3 = new Button("C");
+		bA1 = new Button("±");
+		bA2 = new Button("√");
+
+		b7 = new Button("7");
+		b8 = new Button("8");
+		b9 = new Button("9");
+		bA3 = new Button("/");
+		bA4 = new Button("%");
+
+		b4 = new Button("4");
+		b5 = new Button("5");
+		b6 = new Button("6");
+		bA5 = new Button("*");
+		bA6 = new Button("1/x");
+
+		b1 = new Button("1");
+		b2 = new Button("2");
+		b3 = new Button("3");
+		bA7 = new Button("-");
+		bA8 = new Button("=");
+
+		b0 = new Button("0");
+		b10 = new Button(".");
+		bA9 = new Button("+");
+		// 컴포넌트 크기및 위치
+		lb.setBounds(50, 30, 200, 70);
+
+		bM1.setBounds(30, 100, 50, 30);
+		bM2.setBounds(85, 100, 50, 30);
+		bM3.setBounds(140, 100, 50, 30);
+		bM4.setBounds(195, 100, 50, 30);
+		bM5.setBounds(250, 100, 50, 30);
+
+		bR1.setBounds(30, 135, 50, 30);
+		bR2.setBounds(85, 135, 50, 30);
+		bR3.setBounds(140, 135, 50, 30);
+		bA1.setBounds(195, 135, 50, 30);
+		bA2.setBounds(250, 135, 50, 30);
+
+		b7.setBounds(30, 170, 50, 30);
+		b8.setBounds(85, 170, 50, 30);
+		b9.setBounds(140, 170, 50, 30);
+		bA3.setBounds(195, 170, 50, 30);
+		bA4.setBounds(250, 170, 50, 30);
+
+		b4.setBounds(30, 205, 50, 30);
+		b5.setBounds(85, 205, 50, 30);
+		b6.setBounds(140, 205, 50, 30);
+		bA5.setBounds(195, 205, 50, 30);
+		bA6.setBounds(250, 205, 50, 30);
+
+		b1.setBounds(30, 240, 50, 30);
+		b2.setBounds(85, 240, 50, 30);
+		b3.setBounds(140, 240, 50, 30);
+		bA7.setBounds(195, 240, 50, 30);
+		bA8.setBounds(250, 240, 50, 65);
+
+		b0.setBounds(30, 275, 105, 30);
+		b10.setBounds(140, 275, 50, 30);
+		bA9.setBounds(195, 275, 50, 30);
+
+		// Color
+		Color c = new Color(200, 100, 150);
+		Color b = new Color(217, 228, 248);
+		lb.setBackground(c);
+		setBackground(b);
+		Font f = new Font("고딕", Font.ITALIC, 20);
+		lb.setFont(f);
+		// 컨테이너에 추가
+		add(lb);
+
+		add(bM1);
+		add(bM2);
+		add(bM3);
+		add(bM4);
+		add(bM5);
+		add(b0);
+		add(b1);
+		add(b2);
+		add(b3);
+		add(b4);
+		add(b5);
+		add(b6);
+		add(b7);
+		add(b8);
+		add(b9);
+		add(b10);
+		add(bA1);
+		add(bA2);
+		add(bA3);
+		add(bA4);
+		add(bA5);
+		add(bA6);
+		add(bA7);
+		add(bA8);
+		add(bA9);
+		add(bR1);
+		add(bR2);
+		add(bR3);
+		b0.addActionListener(this);
+		b1.addActionListener(this);
+		b2.addActionListener(this);
+		b3.addActionListener(this);
+		b4.addActionListener(this);
+		b5.addActionListener(this);
+		b6.addActionListener(this);
+		b7.addActionListener(this);
+		b8.addActionListener(this);
+		b9.addActionListener(this);
+		b10.addActionListener(this);
+		bA3.addActionListener(this);
+		bA5.addActionListener(this);
+		bA7.addActionListener(this);
+		bA9.addActionListener(this);
+		bA8.addActionListener(this);
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				super.windowClosing(e);
+				System.exit(0);
+			}
+		});
+		// 윈도우
+		setBounds(0, 0, 330, 350);
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		HwWin4 win = new HwWin4();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+
+기본셋팅 이후 입력된 값을 받아서 계산하는 프로세스를 설정한다.
+↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*String cmd = e.getActionCommand(); 와	Object obj = e.getSource();비교 
+ 여러나라의 언어를 사용하게 되면 이해를 하지못하는 경우가 발생한다. 그래서 입력된 값을 객체로 받는
+ Object obj = e.getSource(); 명령어를 써주는게 좋다.
+	
+
+		
+		String cmd = e.getActionCommand(); 
+		Object obj = e.getSource(); 
+	
+
+		// 변수명으로 무엇을 하는 기능인지 유추가 되어야 한다. 7(-),5(*),3(/)
+		if (obj == bA9) {                                  <- 더하기 버튼을 누른경우
+			firstNumber = Integer.parseInt(lb.getText());    <-입력된 문자열을 숫자로 변환
+			oper = "+";                                      <-계산이 플러스라는것을 명시해준다.
+			lb.setText("");                                  <-입력이 될경우 입력이 되었는지 확인하기위해 숫자를 없애준다.
+		} else if (obj == bA7) {
+			firstNumber = Integer.parseInt(lb.getText());    <- -버튼을 누른경우
+			oper = "-";
+			lb.setText("");
+		} else if (obj == bA5) {                           <-곱하기 버튼을 누른경우
+			firstNumber = Integer.parseInt(lb.getText());
+			oper = "*";
+			lb.setText("");
+		}  else if (obj == bA3) {                           <-나누기 버튼을 누른경우
+			firstNumber = Integer.parseInt(lb.getText());
+			oper = "/";
+			lb.setText("");
+		} 
+    
+    else if (obj == bA8) {                             <-여기서부턴 firstnumber와 계산시 상대 되는 secondnumber를 받아온다.             
+			secondNumber = Integer.parseInt(lb.getText());
+			float result = 0;                                <-firstnumber와 secondnumber를 연산한 후에 계산될 값을 받아올 변수이다.
+			if (oper.equals("+")) {                           <-주어지는 변수들을 실수로 잡아주어야 나눗셈시 소수점까지보인다.
+				result = firstNumber + secondNumber;
+			} else if (oper.equals("*")) {
+				result = firstNumber = secondNumber;
+			} else if (oper.equals("/")) {
+				result = firstNumber / secondNumber;
+			} 
+//			}
+
+			lb.setText("" + result);                         <-settext는 string을 보내기때문에 result를 string으로 변환하는 과정이다.
+		} else {
+			String data = lb.getText();                      <-입력한 글자가 남아있도록 한다.
+
+			lb.setText(data + cmd);                          <- 텍스트에 내가 누른 글자가 나오도록 한다.
+		}
+		// 연산자를 누를 때 첫번째 숫자를 가져와야한다.
+
+//	}
+	}
+	}}// class end
