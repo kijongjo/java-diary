@@ -1,0 +1,133 @@
+NESTED CLASS의 종류?
+1.member inner class
+2.static inner class
+3.local inner class 
+4.annonymous inner class
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+Member inner class?
+member 변수와 같은 역할을 하는 class이다. 
+장점으로는 private로 지정한 큰 class의 member 변수를 불러와 사용할 수 있다. 
+또한 상속하지 않고도 필요한 것만 활용해 쓸 수있다.
+외부 클래스를 인스턴스로 생성 후에 내부 클래스를 생성하여 사용한다. 
+OuterClass out = new OuterClass();
+OuterClass.InnerClass in = out.new InnerClass();
+
+하지만 inner class에서는 static 변수를 선언할 수 없다. 왜냐하면 inner class는 
+먼저 외부 클래스에서 참조값을 형성해 만들어지는데 static은 참조값을 형성하지 않고 
+다른 공간에 만들어지기 때문에 참조값을 받아서 클래스를 형성하는 inner 클래스의 
+경우엔 static 변수를 사용할 수 없다. 
+
+
+ex)
+public class OuterClassEx1 {
+class InnerClass {                         <-outerclass의 참조값 안에서 만듦.
+static int e = 50;                        <-불가능
+		}
+
+	}
+
+*static 변수와 일반 변수의 차이점 
+
+한마디로 new를 해서 사용하느냐 아니냐의 차이
+
+ex)
+class A
+int a =10;
+static int b= 20; 
+
+main(){
+A g= new A():                   <-INSTANCE선언 후에 
+sysout(g.a)                     <-객체 g에 의한 a를 불러오는 것으로 출력해야한다. 그냥 a를 불러오면 오면 안된다
+sysout(A.b)                     <-객체 없이도 CLASS이름에서 바로 불러와 쓸 수있다 
+
+}
+---------------------------------------------------------------------------------------------------------------
+Static inner class?
+Outer Class에서  INNER CLASS를 불러오지 않고 바로 INSTANCE를 할 수 있는 CLASS이다.따라서 INNER CLASS안에는 보통의 INNER CLASS와는
+달리 STATIC 멤버 변수를 사용할 수 있다.
+
+public class OuterClassEx2 {
+static class InnerClass2 {}};
+MAIN{
+InnerClass2 ic2 = new InnerClass2();
+}
+
+-----------------------------------------------------------------------------------------------------------------
+local inner class?
+Outer class 안쪽에 있는  method에 class를 선언하는 것을 말한다.
+Outer class method에서 instance 선언을 해주어야 한다. 지역 클래스는 메소드의 실행이 끝나게 되면 메모리에서 사라지게 된다. 
+지역변수,parameter는 final이 붙은것만 사용할 수 있다.
+------------------------------------------------------------------------------------------------------------------
+annonymous inner Class?
+new 생성자이름(){쓸 내용}
+
+instance에서 참조변수를 생성해 그 참조변수로 무엇인가 하지 않으면 공간낭비가 된다. 오직 다른 class에 들어있는 method로 무엇인가 하고자 한다면 
+annonymous를 써준다. 
+
+annonymous의 예를 들기위해 필요한 개념들 
+*WindowAdapter
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+class{
+HandleAdapter hd = new HandleAdapter();
+addWindowListenser(hd);}
+class HandleAdapter extends WindowAdapter {
+필요한 method 호출}
+windowListener는 overriding이 필요한 모든 method들을 호출해 코드작성시 공간을 많이 차지하는 비효율성이 있다. 
+windowadapter는 필요한 것만 호출해 사용할 수 있는 기능이다. 
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+class{
+HandleAdapter hd = new HandleAdapter();
+addWindowListenser(hd);}
+class HandleAdapter extends WindowAdapter {  
+@Override
+		public void windowClosing(WindowEvent e) {           <-종료만 호출한다.
+			// TODO Auto-generated method stub
+			super.windowClosing(e);
+			System.exit(0);
+}}
+
+    ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
+하지만 HandlAdapter라는 class를 따로 만들고 WindowAdapter와 상속관계를 만들어 사용하는 비효율성을 instance를 이용해 줄일 수 있다.
+기존에 존재하는 class의 생성자 안에 명령어를 넣어준다. 
+indowAdapter 참조변수이름 =  new WindowAdapter(){
+호출하고자 하는 METHOD}
+
+
+EX)
+생성자(){
+WindowAdapter wa =  new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				super.windowClosing(e);
+				System.exit(0);
+			}
+}
+
+   ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
+    ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ 
+위의 방식보다 더 간결하게 사용할 수 있는 방법이 있는데 이때 annonymous inner class를 사용한다. 즉 위의 
+WindowAdapter wa =  new WindowAdapter()는 쓰지도 않을 참조변수를 생성해 공간을 낭비하게 된다. 
+addWindowListener(new WindowAdapter() {method 내용}) 
+차라리 interface의 추상 method만 뽑아와 바로 참조변수가 있을 자리에 넣어주는 방법이다.
+
+
+ex)
+addWindowListener(new WindowAdapter() {               <-class를 생성하지않고 method만 뽑아온것이다.
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				super.windowClosing(e);
+				System.exit(0);
+			}
+		});
+
+
+
+
