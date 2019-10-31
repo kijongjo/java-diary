@@ -1,0 +1,26 @@
+WRAPPER CLASS?
+JAVA는 객체지향 언어이다. 하지만 JAVA에서도 객체지향적이지 않은 것이 있는게 그게 바로 primitive type이다.
+그래서 primitive type의 변수를 객체로 전환하기 위한 클래스를 wrapper class라고 한다.
+JAVA의 API LIBRARY를 보면  PRIMITIVE TYPE의 변수들이 CLASS로 정의 되어 있는 것을 볼 수가 있다.
+예(Boolean Character Integer)  즉 primitive타입을 감싸서 각종 method와함께 조절한다.
+ex)
+Integer it1=new Integer(10);
+Integer it2= new Integer(20);
+
+WRAPPER cLASS도 일반적으로 변수를 담듯이 담으면 객체를 생성해 준다
+
+ex)
+	Integer it3=20;  <- wrapper class를 일반 변수 담듯이 담은 모습.boxing이라고 한다 . 
+  int d = it2;   <-unboxing이라고 한다. 
+  autoboxing -> String = "java" boxing ->unboxing과정을 알아서 해준다.
+  
+ ex) 
+ byte를 long으로 바꾸기
+ Byte g = 127;                      <-Byte를 대문자로
+	   
+	  long f= g.longValue();
+	  System.out.println(f);
+  
+ *주어진수를 2진수로 바꾸는것
+ toBinaryString(주어진 수);
+String bin	=Integer.toBinaryString(10); 
