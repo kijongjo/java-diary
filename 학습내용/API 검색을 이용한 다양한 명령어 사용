@@ -113,5 +113,27 @@ ex)
 rnd.nextInt(45)  45까지 랜덤한 int 나옴   
 
 
+  
+---------------------------------------------------------------------------------------------------------------------------------------
+날짜와 연관된 CLASS들
+System.currentTimeMillis();                             <-1970년 1월 1일을 기준으로 얼마나 지났는지 밀리 seconds로 알려줌
 
 
+SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+    String time2=sdf.format(d);
+    System.out.println(time2);                     <-시분초로 볼 수 있다.
+    System.out.println(sdf.format(time)); 
+
+
+ Calendar cal =Calendar.getInstance();           <-getInstance();는 calendar의 변수들은 protected 되어 있어서 상속하지않으면 못쓰게 되어있는데 
+                                                   상속하지 않고도 쓸수있도록 만든것이다.
+   System.out.println(cal);
+   int week = cal.get(Calendar.WEEK_OF_YEAR);
+   System.out.println("오늘은 올해에  "+week+"번째 주 입니다. ");
+   System.out.println(cal.get(Calendar.YEAR));
+   System.out.println(cal.get(Calendar.MONTH)+1);
+   System.out.println(cal.get(Calendar.DATE));
+   System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+   System.out.println(cal.get(Calendar.HOUR));  
+   System.out.println(cal.get(Calendar.MINUTE));  
+   System.out.println(cal.get(Calendar.SECOND));
