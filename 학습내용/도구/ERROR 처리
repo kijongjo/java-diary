@@ -1,0 +1,66 @@
+에러의 종류 ?
+ERROR : 치명적 오류 
+EXCEPTION: 가벼운 오류 
+
+
+
+EXCEPTION을 처리하는 방법 ? 
+1)예외처리 
+2)예외전가 
+
+
+
+
+1)예외처리 
+try{시도할 명령어
+}catch(예외명 하위 카테고리){
+예외면 이것을 실행 
+}catch(예외명 상위 카테고리){
+
+}finally{                     <-i/o,network,db에서 항상 써주어야함
+예외가 있든 없든 반드시 실행
+}
+
+
+
+
+ex)
+
+try {
+			Random rnd = new Random();
+			int a = 100;
+			int value = rnd.nextInt(10);
+			System.out.println("value : "+value);
+			System.out.println(a / value);        <- 100나누기 0이 한번 나와서 오류가 생길 수 있다. arithmeticexception 0으로 나누려고했다.
+		   System.out.println("성공");           <-예외가 발생하면 a/value이하의 문장을 출력하지않고 catch로 바로 넘어가서 예외를 확인한다. 
+		} catch (ArithmeticException ae) {      <-0으로 나눳을 때의 오류  <-하위 클래스를 위로 배치한다
+			System.out.println("0으로 나눌 수 없습니다.");
+			ae.printStackTrace();                 <-무엇인지 모르는 에러라면 이걸 찍어보고 찾아본다. 상태를 알려준다.
+			// rnd.nextInt();
+		}catch(Exception e) {                   <-exception의 최상위 클래스  arithmeticexception이 exeption에 상속된다.
+			                                        모든 exception의 조상이다.이게 가장 마지막에 위치해야한다. 왜냐하면 위에서부터 비교하기 때문이다. 
+			  System.out.println("");
+		}
+	}
+}
+
+2)예외전가 
+class이름 throws 오류이름{
+내용
+}
+오류 나는것을 스스로 처리하지 않고  생성자에게 맡기는 것.
+
+
+	public static int plus(String a, String b) throws NumberFormatException { // static인 이유 사용시 new를 안하고 썻기 때문에.
+		// 오류처리
+		int x = Integer.parseInt(a);
+		int y = Integer.parseInt(b);
+return x+y;
+	}
+  
+  public static void main(String[] args) {
+  String a = "10";
+	String b = "20a";
+  int result = plus(a,b);
+}
+}
