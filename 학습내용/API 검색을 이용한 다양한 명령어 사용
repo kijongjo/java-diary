@@ -104,3 +104,12 @@ ex)
   String email = "dagda@hanafos.com";
 		System.out.println(email.substring(0, email.indexOf('@')));     <-수 대신에 email.indexOf('@') @까지만으로 한다는 명령어. 
   
+------------------------------------------------------------------------------------------------------------------------------------------
+randome 값 생성
+int byte등을 임의로 지정해 출력가능
+rnd.next데이터타입(수)  <-수는 한계치 지정 
+
+ex)
+rnd.nextInt(45)  45까지 랜덤한 int 나옴   
+
+
