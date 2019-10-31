@@ -45,6 +45,11 @@ String에만 있는 method이기 때문이다. (부모class는 겹치는것은 �
 
 object에 담긴 a의 정보인 딸기가b에 담겼으니 딸기는 object 일까? 아니면
  vector에담기는것은 object로 변환해서 담기기 때문에 tostring을 해준걸까?
+답: a의 정보가 string이여도 b는 c에 담길때 tostring을 해주어야한다.
+     b가 object면 b가 자식 참조값을 따라서 들어가 정보를 찾아
+     출력하는 순간에는 object가 된다.
+
+
 
 
 
