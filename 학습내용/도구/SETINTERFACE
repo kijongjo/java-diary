@@ -29,3 +29,56 @@ hashSet객체이름.Next();
 
 list의 특징        : 중복된 값을 허용한다. 순서가있다. 
 setinterface의 특징: 순서가 없다. 중복된 값이 없다.
+
+
+-----------------------------------------------------------------------------------------------------------------------
+ex)
+hashset과 iterator을 사용한 문제
+package day15;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+
+public class HashSetEx2 {
+	public static void main(String[] args) {
+		// int 6칸짜리 배열 m 선언
+		int[] m = new int[6];
+		// HashSet 객체 생성
+		HashSet hs = new HashSet();
+		// 랜덤하게 1부터 45사이의 값 뽑기
+		Random rnd = new Random();
+
+		// hashset에 담기
+		label: while (true) {
+			for (int i = 0; i < m.length; i++) {
+				hs.add(rnd.nextInt(45));
+			}
+			// hashset의 요소 갯수가 6개라면 중단
+			if (hs.size() == 6) {
+				break;
+				// 아니면 3번으로 돌아가기
+			} else if (hs.size() < 6) {
+				continue label;
+			}
+		}
+		// hashset에서 1개씩 값을 꺼내 배열에 담기
+		Iterator it = hs.iterator();
+
+		//
+		while (it.hasNext()) {
+			for (int i = 0; i < m.length; i++) {
+				m[i] = (int) it.next();//객체를 뽑아오기 때문에 string으로 변환 시켜주어야한다.
+			}
+
+		}
+		// 정렬하기
+		Arrays.sort(m);
+		// 배열 요소를 1개씩 꺼내 화면에 출력
+		for (int i = 0; i < m.length; i++) {
+			System.out.print(m[i] + "\t");
+		}
+
+	}
+}
