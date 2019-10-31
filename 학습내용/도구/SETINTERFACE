@@ -20,7 +20,7 @@ while문에 들어가는 iterator의 method = hasnext와 next 가 들어가야�
 hashSet객체이름.hasNext(); 
 class에 객체가 남아있는지 없는지를 불리언타입으로 알려준다. 
 hashSet객체이름.Next(); 
-하나씩 하나씩 객체에서 꺼내준다
+하나씩 하나씩 객체에서 꺼내준다         <-중요한 것은 꺼내고나면 안에 들어 있는 갯수가 줄어든다.
 
 
 
