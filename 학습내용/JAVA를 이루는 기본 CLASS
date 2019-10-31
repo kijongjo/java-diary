@@ -2,11 +2,18 @@ Object?
 최상위 class
 "Object" 클래스의 모든 메소드는 모든 클래스에서 사용이 가능.
 
-* TOSTRING();
+‐-----------------------------------------------------
+TOSTRING();
+object에 속해있는 method로 object이하의 클래스는 모두 가지고 있다.
+자신이 가진 정보나 값을 string으로 변환해 보여준다.
+기본 생성자로 이루어진 객체는 참조값만 보여준다.object의 하위 클래스
+중 string과 file class는 자신만의 method로 override하여 사용하고 있다.
 "String" 클래스 객체의 "toString"메소드는 자신이 가진 값을 그대로 리턴해주고,
 "File"클래스 객체의 "toString"메소드는 자신이 가진 해당 경로값을 리턴해 준다.
 
-문자열의 참조값을 알고자 한다면
+string객체를 기본생성자만 선언하고 출력하면 참조값이 아닌 공백(=" ")이 나온다.
+
+정보를 입력한 객체인 문자열의 참조값을 알고자 한다면
 	getClass().getName() + '@' + Integer.toHexString(hashCode())
            = 클래스의 이름 + '@' + HASHCODE 값을 16진수로 바꾼값.	 
 를 써주는게 더 정확한 값이다 .
@@ -16,6 +23,30 @@ ex )
 	System.out.println("obj1 :" + obj1.toString());  <-OBJ1을 실행하면 사실 TOSTRING이 생략된것이다.
   
 * 클래스 이지만 PRIMITIVE TYPE 처럼 사용할 수 있는 예외적인 클래스 : STRING 
+
+
+*Object class를 부모 변수로 하고 하위 class의 참조값을 집어 넣어 사용하기
+
+String a = new String("딸기")
+
+Object b= new Object();
+
+b =a; 
+System.out.println(b); 
+딸기 출력됨. 
+
+이유: a의 참조값이 b에 담긴다.> 출력시 b에 담긴 a의 참조값을 따라들어가 a의 heap에 담겨있는 정보를 가지고와 string으로 출력 (b.toString()에서 
+     toString()이 생략되어 있기 때문에 string으로 출력된다. 
+String c =b.toString();
+System.out.println(a.subString(0.1));
+이유:  b는object이다. substring은 쓰지 못한다 . 왜냐하면 substring은 object엔 없고 하위 클래스인 
+String에만 있는 method이기 때문이다. (부모class는 겹치는것은 쓸수 있어도 자식class에만 있는 것은 쓸 수 없다.)
+
+
+object에 담긴 a의 정보인 딸기가b에 담겼으니 딸기는 object 일까? 아니면
+ vector에담기는것은 object로 변환해서 담기기 때문에 tostring을 해준걸까?
+
+
 
 ------------------------------------------------------------------------------------------------------------------------
 String class의 공간 활용
