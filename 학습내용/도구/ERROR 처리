@@ -48,8 +48,9 @@ try {
 class이름 throws 오류이름{
 내용
 }
-오류 나는것을 스스로 처리하지 않고  생성자에게 맡기는 것.
-
+오류 나는것을 스스로 처리하지 않고  생성자에게 맡기는 것
+*throws를 안써도 오류가 나오는데 왜 써주는 걸까? 
+throws표시를 해두면 아 오류가 나면 이 method에서 나올 확률이 있겠구나라고 생각해 찾아서 유지보수하기 쉬워지기 때문이다. 
 
 	public static int plus(String a, String b) throws NumberFormatException { // static인 이유 사용시 new를 안하고 썻기 때문에.
 		// 오류처리
