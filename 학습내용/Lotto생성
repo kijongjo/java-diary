@@ -29,11 +29,11 @@ public class Lotto {
 	  }
  public void set() {
 	 for (int i = 0; i < 6; i++) {
-		m[i] = rnd[i]; 
+		m[i] = rnd[i];  <-임의로 설정된 값을 다시 배열네 넣음 6개 
 	}
     System.out.println("set");
  }
-  public void sort() {
+  public void sort() {         <-크기 순으로 출력
 	Arrays.sort(m); 
 	 
  }
