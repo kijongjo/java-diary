@@ -82,3 +82,41 @@ public class HashSetEx2 {
 
 	}
 }
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+HashMap?
+ import java.util.Set;
+ import java.util.HashMap;
+ class(){
+ HashMap 객체이름 = new HashMap();
+ hm.put(key, value);                <-추가할 때 쓰는 method put(key,value)
+ Object obj = hm.get(key); // <-꺼내는 명령어로 get. key값을 알아야 꺼낼 수 있다. object를 return한다.
+ System.out.println(obj);
+ }
+ 
+ KEY,VALUE를 쌍으로 묶는다. (KEY,VALUE)        짝을 지어서 쓰는것.
+         KEY = 중복X 
+       VALUE = 중복O 
+
+ex)
+hm.put("국보 1호", "숭례문");
+
+*key목록 보고 출력하기 
+Set set=hm.keySet(); <-key가 있는지 없는지 보는데 set으로 리턴한다. 
+		
+		             <-목록을 출력 
+		
+set.get(0);는 안된다. iterator를 써야한다 
+		
+Iterator it = set.iterator();
+		
+while(it.hasNext()) {
+		Object obj1 = it.next();
+		System.out.println(obj1+":"+hm.get(obj1));  <-key랑 value랑 나란히 출력해라.
+		
+*KEY 제거
+hm.remove(KEY);//제거기능 key를 써준다.
+			
+
+
+
