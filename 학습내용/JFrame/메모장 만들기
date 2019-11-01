@@ -1,0 +1,9 @@
+Text만들기 + scroll 바 만들기 
+JTextARE
+멤버 변수 
+JTextArea 변수이름;
+JScrollPane 변수이름;
+
+JTextArea 변수이름 = new JTextArea();
+JScrollPane 변수이름 = new JScrollPane(JTA, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,     <-수직 수평 으로 스크롤바를 하고 필요할때마다 생기게 만든다.
+				                              JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);        <-수직,수평 순서로 해야한다.
