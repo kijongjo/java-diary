@@ -1,0 +1,50 @@
+Generic이란? 
+class<미확정Type>{
+T 변수이름;
+}   
+개별적으로 되어 있던 것을 일반화해서 상황에 맞게 변환하는 것을 말한다. 
+즉 데이터 형식에 의존하지 않고 하나의 값이 여러 다른 데이터 타입들을 가질 수 있도록 하는 것에 중점을 두어 
+재사용을 높일 수 있는 프로그래밍 방식을 말한다. 
+
+
+
+
+EX)
+
+public class GenEX<T>{
+TT[] array;}
+----------------------------------------------------------------------------------------------------------------------
+Collection과 general
+collection이름 <datatype> 변수이름 = new collection이름<datatype>();
+collection은 모두 generic이다. 때문에 어떤 타입이든 상관없이 데이터를 저장 할 수 있는 것이다. 
+하지만 이런 부분에 있어서 장점도 있고 단점도 있다.
+
+단점= collection에 들어간 object를 string type으로 변환하고자 할때 만약 들어간 정보가 원래 
+     string이 아닌 다른 data type이였을 경우 오류가 난다. 오류가 날지 안날지는 출력이 되고나서 알게 되는데
+     그때가 되면 너무 늦은 상태가 된다. 
+     
+     
+     그래서 미리 필터링을 할 수 있도록 하는데 선언시 <>안에 datatype을 넣어주면 
+     그 datatype만 collection에 넣을 수 있도록 설정해 줄수 있다.
+     
+     ex)
+     
+    public class TestMain2 {
+	 public static void main(String[] args) {
+		Integer[] arr1 = {20,30,10,90,80};
+		GenEx<Integer> ge1 = new GenEx<Integer>();
+	 ge1.setArray(arr1);
+	 ge1.print();
+	 
+	  System.out.println("----------------------------");
+	
+	String[] arr2 = {"바둑이","아롱이","홍시","재롱이"};
+	GenEx<String> ge2 = new GenEx<String>();  //<-string임을 명시
+	ge2.setArray(arr2);
+	ge2.print();
+	}
+
+}
+
+     
+      
