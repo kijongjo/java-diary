@@ -117,6 +117,17 @@ while(it.hasNext()) {
 *KEY 제거
 hm.remove(KEY);//제거기능 key를 써준다.
 			
+*
+*향상된 FOR문? 
+for(key:value){
+System.out.println(key);}
+MAPPING을 적용한 FOR문으로 기존의 FOR문과 기능이 같다. 
 
+		
+ex)
+int [] array ={20,30,40}
+for (int x : array) {
+			System.out.println(x);
+		}
 
 
