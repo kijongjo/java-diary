@@ -7,3 +7,109 @@ JScrollPane 변수이름;
 JTextArea 변수이름 = new JTextArea();
 JScrollPane 변수이름 = new JScrollPane(JTA, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,     <-수직 수평 으로 스크롤바를 하고 필요할때마다 생기게 만든다.
 				                              JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);        <-수직,수평 순서로 해야한다.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+상단 메뉴 바 만들기 
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+JMenuBar  변수이름; 
+JMenu     변수이름; 
+JMenuItem 변수이름;
+
+JMenubar는 상단에 MENU를 만들 수 있는 bar를 만드는 것이고 JMenu는 bar에 있을 category를 만든다. 
+JMenuItem은 JMenu 안에 있을 내용을 생성하게 된다. 
+
+                  
+메뉴 bar ->FILE -NEW      
+               - OPEN
+	       - SAVE
+	       - EXIT          
+         
+	 ->HELP -HELP 
+
+ex)
+JMenuBar JMB;
+JMenu jmFile, jmHelp;
+JMenuItem jmiNew, jmiOpen, jmiSave, jmiExit, jmiHelp;
+
+생성자(){
+jmiNew = new JMenuItem("New");     <-생성
+jmiOpen = new JMenuItem("OPEN");
+jmiSave = new JMenuItem("SAVE");
+jmiExit = new JMenuItem("EXIT");
+jmiHelp = new JMenuItem("HELP");
+
+jmFile = new JMenu("File");
+jmHelp = new JMenu("Help");
+
+jmFile.add(jmiNew);               <-생성된 요소들을 더 큰 분류 위에 올리기 
+jmFile.add(jmiOpen);
+jmFile.add(jmiSave);
+jmFile.add(jmiExit);
+
+jmHelp.add(jmiHelp);  
+
+JMB.add(jmFile);                  <-최종적으로 MenuBar 위에 올리기 
+JMB.add(jmHelp);
+
+setJMenuBar(JMB);                 <- 만들어진 MENUBAR를 메모장 판 위에 올리고 끝낸다. 
+}
+---------------------------------------------------------------------------------------------------------------
+만들어진 MENUBAR에 있는 요소들에 기능 부여하기
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+class
+생성자(){MenuItem이름.addActionListener(this);}
+@Override
+	public void actionPerformed(ActionEvent e) {기능}
+
+
+만들어진 MENUBAR들에 기능을 부여하기 위해선 클릭시 반응을 인식하도록 해야하고 
+그 안에서 METHOD를 통해 원하는 반응이 이루어지도록 해야한다. 
+
+
+ex)
+1)EXIT을 눌렀을때 종료가 되도록 만들기.
+2)NEW를  눌렀을때 선택 창이 뜨고 난 후 메모장에 글자가 있다면 가져오고 아니면 초기화 시키기  
+3)OPEN을 눌렀을때 파일 불러오기 기능 만들기 
+4)SAVE를 눌렀을때 저장 기능 만들기 
+5)Help를 눌렀을때 이전에 만들어 놓았던 class불러오기 
+
+*
+필요한 method 
+클릭 시  
+1)e.getSource(); 
+클릭 시 object로 값을 return한다. e.getActionCommand();는 String으로 넘어와 같은 언어를 사용할 경우 보기 편하지만 
+ 만약 다른 언어를 사용할 경우엔 판단하기 어려워지는 경향이 있다. 때문에 object로 넘어오는 getSource를 많이 쓴다. 
+
+EXIT
+1)dispose(); 
+창을 하나 씩 종료한다. 만약 System.Exit(0);을 쓰게 되면 여러개의 창을 띄웠을 경우 의도치 않은 창도 모두 종료 되기 때문에 
+하나의 창만을 종료하는 dispose();를 사용하는 것이 낫다. 
+
+New
+1)JOptionPane.showConfirmDialog(parentComponent, message, title, class이름.optionType);
+선택창을 생성한다.message는 선택창을 띄운 목적을 사용자에게 물어보고
+title은 선택창의 제목, optionType은 선택창 내에 YES NO CANCEL 옵션을 넣을 수 있도록 해준다. 
+JOptionPane.YES_NO_CANCEL_OPTION
+JOptionPane.YESL_OPTION
+JOptionPane.NO_OPTION
+JOptionPane.CANCEL_OPTION등이 있다.
+
+생성자(){
+기본셋팅
+jmiExit.addActionListener(this);
+jmiNew.addActionListener(this);
+jmiOpen.addActionListener(this);
+jmiSave.addActionListener(this);
+jmiHelp.addActionListener(this);}
+
+
+public void actionPerformed(ActionEvent e) {
+
+
+
+
