@@ -99,6 +99,29 @@ JOptionPane.YESL_OPTION
 JOptionPane.NO_OPTION
 JOptionPane.CANCEL_OPTION등이 있다.
 
+Open
+1)
+JFileChooser 변수이름 = new JFileChooser();
+int 변수이름=Chooser의 변수이름.showOpenDialog(this);
+if (변수이름 == JFileChooser.APPROVE_OPTION)
+File 변수이름 = JFC.getSelectedFile();
+열기 창이 나오도록 하는 옵션이다. int 값으로 주어진다.
+다이얼로그 창에서 열기가 정상적으로 수행된경우 0 을 반환 하고, 
+취소를 누른경우 1을 반환 한다.
+조건문에서 JFileChooser 에는 몇가지 상수가 정의되어 있는데,
+APPROVE_OPTION (상수 0) 즉, 파일열기를 할경우 0이 result 변수에 들어가고, 파일열기를 했을때 사용되는 상수인 APPROVE_OPTION 과 비교하여
+정상적인 열기가 이루어졌을때 조건문이 수행 된다.
+열기창이 열린 후 파일 클릭식 getSelecteFile(); method에 의해 경로가 저장된다. 
+
+SAVE
+JFileChooser JFC = new JFileChooser();
+int 변수이름 = JFC.showSaveDialog(this);
+if (변수이름 == JFileChooser.APPROVE_OPTION) {
+File f= JFC.getSelectedFile();}
+Open과 동일하다.
+
+
+
 생성자(){
 기본셋팅
 jmiExit.addActionListener(this);
@@ -108,7 +131,63 @@ jmiSave.addActionListener(this);
 jmiHelp.addActionListener(this);}
 
 
-public void actionPerformed(ActionEvent e) {
+public static void main(String[] args) {
+		MemoJJang ex = new MemoJJang("제목없음-메모장");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// String cmd = e.getActionCommand();
+		Object cmd = e.getSource(); // object로 넘어온다 객체지향이니 객체로 하자
+		if (cmd == jmiExit) {
+			
+			//System.exit(0);
+		} else if (cmd == jmiNew) {
+			// jta에 글자가 있다면 가져오기.
+			String data = JTA.getText();
+			data.length();
+			if (data.length() != 0) {
+				int result = JOptionPane.showConfirmDialog(this, "저장할래?", "메모장", JOptionPane.YES_NO_CANCEL_OPTION);
+				//JOptionPane.showConfirmDialog(parentComponent, message, title, optionType)
+				System.out.println("누른버튼 : " + result); // <-예 아니오 캔슬은 0,1,2가 나온다. RESULT변수에 대입햇으니 RESULT에 나온다.
+				if (result == JOptionPane.YES_OPTION) {
+					// 저장버튼
+					System.out.println("저장하자..");
+				}
+				if (result == JOptionPane.NO_OPTION) {
+
+				}
+
+			} // <- 알람 뜨게 해주는 기능 S=STATIC 채워져있는것은 PUBLIC
+
+			JTA.setText("");
+			// "생성하는 것.cmd "
+		} else if (cmd == jmiOpen) {
+			System.out.println("열기 메뉴아이템 선택");
+			// 파일을 선택
+			JFileChooser JFC = new JFileChooser(); // <-파일 추져를 통해 열기창 나오도록한다.
+			int result = JFC.showOpenDialog(this);
+			if (result == JFileChooser.APPROVE_OPTION) {
+				// 파일 I/O
+				File f = JFC.getSelectedFile(); // 파일로부터 이름을 가져와서 찍으라.
+				System.out.println(f.getName());
+			}
+			// JOptionPane.showOptionDialog(this, "열기"," 열기",JOptionPane, messageType, icon,
+			// options, initialValue)
+
+		} else if (cmd == jmiSave) {
+			System.out.println("저장하기");
+			JFileChooser JFC = new JFileChooser("c:\\"); //<"c:\\"이걸 넣어주면 c드라이브가 처음에 열린다. <-운영체제가 바뀌었을때를 감안해야해서 종속적으로 하게 되면 오류가 생긴다. 안좋은 선택. (리눅스는 최상위 디렉토리가 루트.)
+			int result = JFC.showSaveDialog(this);
+			if (result == JFileChooser.APPROVE_OPTION) {
+               File f= JFC.getSelectedFile();
+               System.out.println(f.getName());
+			}
+		}else if(cmd == jmiHelp) {
+			
+			new SwingEx1();  //전에 만든 창이 뜬다. 
+			
+		}
 
 
 
