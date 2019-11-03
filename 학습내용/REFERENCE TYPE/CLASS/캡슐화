@@ -39,3 +39,6 @@ ex)
  Marine Marine1 = new Marine();  //day08의 Marine생성자에  pubilc
 	    atm.setName("조기종");
 	    System.out.println(atm.getName());
+	    
+------------------------------------------------------------------------------------------------------------------------------------
+*setter getter를 이용한 lotto번호 
