@@ -28,19 +28,24 @@ class이름 객체이름 = new class이름(); <- 객체가 생성된다.
 객체이름.행동();                      <-행동에 대한 method가 출력된다.
 객체이름.속성=원하는값;                <-객체의 정보가 추가된다.
 
+*용어정리
+참조변수(=class 이름) = new(=객체 할당 연산자) 생성자();  
+instance:메모리에 할당된 객체로 하나의 클래스로부터 여러개의 인스턴스를 생성할 수 있다. 
+
+
 
 ex)
 package day08;
 
-public class Marine {
+public class Marine {                               <-Marine class 
 	
 
 	int hp, x, y;
-	int 사거리, 공격력, 방어력, 공격속도;                  <-
+	int 사거리, 공격력, 방어력, 공격속도;                  
 	int 이동속도;
 
 	
-	Marine() {
+	Marine() {                                   <-기본 생성자
 		hp = 200;
 		x = 1;
 		y = 2;
@@ -52,7 +57,7 @@ public class Marine {
 
 	}
 
-	Marine(int a) {
+	Marine(int a) {                             <-일반 생성자
 		hp = a;
 		x = 1;
 		y = 2;
@@ -64,7 +69,7 @@ public class Marine {
 		System.out.println("매개변수 있는 생성자");
 	}
 
-	void 공격하기() {
+	void 공격하기() {                           <-method 
 		System.out.println("두두두");
 	}
 
@@ -89,7 +94,8 @@ public class Marine {
 
 	}
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+main method에서 생성한 class 사용 
 
 public class TestMain3 {
 	public static void main(String[] args) {
@@ -118,9 +124,7 @@ public class TestMain3 {
 		System.out.println("사거리: " + Marine1.사거리);
 		System.out.println("이동속도: " + Marine1.이동속도);
 
-*용어정리
-참조변수(=class 이름) = new(=객체 할당 연산자) 생성자();  
-instance:메모리에 할당된 객체로 하나의 클래스로부터 여러개의 인스턴스를 생성할 수 있다. 
+
 -------------------------------------------------------------------------------------------------------------
 데이터 저장 원리
 Car class를 만들고 난후
