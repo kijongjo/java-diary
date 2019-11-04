@@ -1,0 +1,150 @@
+Step
+1)
+기본적인 JFRAME 창,일정한 간격을 가진 버튼 3개 넣음. 
+
+2)
+Image를 사용할 수 있도록 환경 조성후 버튼에 입힌다.
+
+
+3)
+말들의 움직임을 표현 하기 위한 Horse class 만든다.
+
+key point4),5),6),7),8)
+4)
+Horse의 일반 생성자에 해당 class 값을 받아 온다 .
+
+5)THread를 상속받고 run method를 override한다. 
+
+6)
+run에서 for문을 만들고 fo문 안에 버튼의 위치를 
+변화시키는 명령어를 삽입한다. 단, 위치변화는 3가지 버튼 모두 
+동일하게 움직이는 것이 아닌 random 값을 준다. 
+
+7)
+초마다의 움직임을 표현하기위해 thread.sleep(초를 나타내는 수)+try catch문을
+더해준다. 
+
+8)
+출력 class에 Horse class의 객체.start() ; 로 표현해준다. 
+
+
+
+
+Horse Class
+
+
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+
+public class Horse extends Thread {
+	
+	JButton jbtn;
+	ImageIcon img1, img2;
+	
+	
+
+	public Horse(JButton jbtn, ImageIcon img1, ImageIcon img2) {
+		super();
+		this.jbtn = jbtn;
+		this.img1 = img1;
+		this.img2 = img2;
+	}
+
+	public Horse(JButton jbtn) {                                           <- 소스 generate using field 클릭을 사용하면 해당 멤버 변수에 맞는 생성자가 나온다.
+		super();
+		this.jbtn = jbtn;                                                    <-참조값이 class의 member변수로 초기화가 된다.
+	}
+
+	@Override
+	public void run() {
+		
+		jbtn.setIcon(img2);
+		Random rnd = new Random();
+		for (int i = 0; i < 500; i++) {
+			try {
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+
+				e.printStackTrace();
+			}
+			jbtn.setLocation(jbtn.getX() + rnd.nextInt(10), jbtn.getY());     <- 랜덤하게 값을 주며 반복문의 i는 위치변화에 영향을 주지 않는다. 표현만 해줄 뿐이ㅏㄷ.
+		}
+	}
+}
+
+출력 class
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Racing extends JFrame implements ActionListener {
+	JButton jbtn1, jbtn2, jbtn3, jbtnstart;
+
+	ImageIcon img1, img2, img3;
+	
+	Horse h1, h2, h3;
+    
+	Racing(String name) {
+		super(name);
+		setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBounds(0, 200, 1500, 500);
+
+		img1 = new ImageIcon("src/images/horsestop.gif");
+		img2 = new ImageIcon("src/images/horse.gif");
+		img3 = new ImageIcon("src/images/bg.gif");
+		jbtn1 = new JButton(img1);
+		jbtn2 = new JButton(img1);
+		jbtn3 = new JButton(img1);
+		jbtnstart = new JButton("시작");
+		
+	
+       
+	
+		add(jbtn1);
+		add(jbtn2);
+		add(jbtn3);
+		add(jbtnstart);
+
+		jbtnstart.addActionListener(this);
+
+		jbtn1.setBounds(0, 120, 100, 55);
+		jbtn2.setBounds(0, 200, 100, 55);
+		jbtn3.setBounds(0, 280, 100, 55);
+		jbtnstart.setBounds(640, 360, 100, 20);
+     
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		Racing rc = new Racing("경마장");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+
+		
+		if (h1 == null) {                         <-한번만 눌러서 적용되도록 한다.계속 눌러서 가속 되는것을 방지한다. 
+			
+
+			h1 = new Horse(jbtn1, img1, img2);      <- 말 클래스에 해당 변수 순서가 있는 일반 생성자가 있어야 한다.
+			h2 = new Horse(jbtn2, img1, img2);
+			h3 = new Horse(jbtn3, img1, img2);
+            h1.setPriority(Thread.MAX_PRIORITY);   최우선        <-우선순위를 줄수잇다.
+            h3.setPriority(Thread.MIN_PRIORITY);   최하
+			h1.start();
+			h2.start();
+			h3.start();
+		}
+	}
+
+}
