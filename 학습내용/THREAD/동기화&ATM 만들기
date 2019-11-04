@@ -1,0 +1,130 @@
+synchronize?
+public synchronized type method 이름(){}
+하나의 객체에 여러개의 thread가 사용되면 꼬이는 경우가 발생하는데 그것을 방지하기 위한 것이다.
+만약 ATM기를 만드는데 입금과 출금이 동시에 이루어지게 되면 꼬이게 된다. oracle 같은 DB에서는 이를 방지하기 위해 
+LOCK이라는 기능을 만들었다. DB의 LOCK처럼 JAVA에선 synchronize로 이러한 막힘 현상을 막게 된다. 
+즉 특정 synchronized된 method가 실행될 시에 다른 thread는 잠시 멈추게 된다.
+
+
+ATM 만들기 
+STEP
+
+3개의 CLASS 필요
+1. 입출금 METHOD를 가진 CLASS
+2. THREAD로 상속 또는 구현 되어  출력 CLASS의 정보를 받아 행동을 담당하는 CLASS 
+3. 기본 정보를 구성하고 THREAD에 정보를 주어 만들어진 행동을 RETURN해 출력하는 CLASS 
+
+1. 입출금 METHOD를 가진 CLASS 만들기 
+KEYPOINT 1)
+1)
+SETTER GETTER로 입금 출금을 만든 후 SYNCHRONIZED를 해주어 입금이 이루어져 잔고에 -변화를 줄때 
+출금은 잠시 멈추어 잔고에 -변화를 주지 않도록 만든다. 
+
+ex)
+public class ATM  {
+	String account;
+	int balance;
+
+	public ATM(String account, int balance) {               <-정보 받아 대입.
+		super();
+		this.account = account;
+		this.balance = balance;
+	}
+
+	public synchronized void deposit(int money) {           <-synchronized 되어진 모습
+		balance += money;
+		System.out.println(money + "원 입금합니다.");
+		System.out.println("현재잔액 : " + balance);
+
+	}
+
+	public synchronized void  widthDraw(int money) {        <-synchronized 되어진 모습
+		if (balance >= money) {
+			balance -= money;
+			System.out.println(money + "원 출금합니다.");
+			System.out.println("현재잔액: " + balance);
+		}
+	}
+public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {                  <-기존에 현금이 얼마 있을지 임의로 정할 수 있다. 
+		this.balance = balance;
+	}
+	}
+
+2. THREAD로 상속 또는 구현 되어  출력 CLASS의 정보를 받아 행동을 담당하는 CLASS 만들기
+ KEYPOINT 1),3)
+ 1)
+ THREAD 상속하기 
+ 2)
+ ATM CLASS를 쓰기위해 MEMBER 변수로 ATM CLASS 만들기 
+ 3)
+ run method overriding 해주기 
+ for문+try catch문으로 시간에 따라 움직이는 것처럼 보이도록 만들어주기
+ 
+ ex)
+ import java.util.Random;
+
+//동시에 하나의 계좌에서 입금과 출금기능을 수행할 수 있도록 멀티 쓰레드 처리 해야한다.
+//계정 정보 : ATM
+public class ATMThread extends Thread {
+	ATM atm; 
+	Random rnd = new Random();
+
+	public ATMThread(ATM atm) {               <-3.출력클레스에서 atm 값을 받아온다. 
+		this.atm = atm;
+
+	}
+
+	@Override
+	public void run() {
+		// 5회 입금, 5회 출금
+
+		boolean flag = true;
+		for (int i = 0; i < 10; i++) {           <-for문과 try catch문의 조합 
+			int money = rnd.nextInt(10) * 1000;    <-입출금시 얼마를 입금 출금할지를 정하기 위해 money를 랜덤 값으로 잡았다.money 값에 따라 +,-가 달라진다.
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (flag)                             <-flag변수는 true이다 . if문에서 true는 바로 아래 명령이 진행이 된다.(입금)                              
+				atm.deposit(money);                 <-랜덤값 money가 ATM class의 deposit으로 들어가고 들어간 값은 ATM의 balance에
+			else                                    추가돼 balance값이 향상된다.
+				atm.widthDraw(money);               <- 랜덤값 money가 ATM class의 widthdraw으로 들어가고 들어간 값은 ATM의 balance에
+		                                            추가돼 balance값이 감소된다.              
+        
+        
+			flag = !flag;                         <-flag를 부정하다. flalse가 된다. false인 상태에서 !flag는 true이다. 
+		}                                         즉 처음(i=0)에 money의 랜덤값을 받고 첫 flag는 true이니 입금된다. 
+                                              이후 flag는 !flag로 인해 false가 되고 두번째(i=1)에서 true가 되어 
+                                              출금된다. 이것을 계속 반복한다.
+	}
+}
+
+ 
+ 3.기본 정보를 구성하고 THREAD에 정보를 주어 만들어진 행동을 RETURN해 출력하는 CLASS
+ 1)
+ ATM CLASS를 INSTANCE하고 이름값,balance값(기존에 가지고 있는 현금이며 두가지 요소는 ATM CLASS의 일반 생성자중 하나이다.) 
+ key point 2)
+ 2)
+ ATM thread class를 instance하고  start();를 해준다.
+ 
+ 
+ ex)
+ public class ATMtest {
+	public static void main(String[] args) {
+		ATM atm = new ATM("홍길동",10000);	
+		ATMThread at1 = new ATMThread(atm);
+		ATMThread at2 = new ATMThread(atm);
+		ATMThread at3 = new ATMThread(atm);
+	    
+		at1.start();
+		at2.start();
+		at3.start();  
+}
+}             
+
