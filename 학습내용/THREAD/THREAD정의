@@ -1,0 +1,129 @@
+Thread ?
+메모리를 할당 받아 실행중인 프로그램을  프로세스라고 하는데 
+프로그램 내에서 실행되는 흐름의 단위를 Thread라고 한다.
+
+multi thread 
+하나의 환경에서 여러개의 일을 하는 것. 
+
+multi thread환경을 만드는 방법 2가지 
+1.thread 상속 
+2.Runnable interface
+
+
+  start 
+    ↓   
+   준비→시작 → 종료
+       ↓
+   잠시 멈춤
+   
+ 
+   thread 상속 방법 
+   
+   1)
+   thread class를 상속한다. 
+   2)
+   run() override를 한다.
+   3)
+   start();를 실행한다 
+   
+   
+   ex)
+ *객체이름.start();
+thread를 실행시키는 명령어 
+
+ 한번에 실행 되는 것이 아닌 thread가 메모리 상에서 준비를 마친 후 각자 준비가 완료 되면 시작하게 된다. 
+thread가 아니였을때에는 멍멍이가 먼저 0부터 99까지 출력된 후에 야옹이가 0부터 99가 순서대로 출력되었을 텐데
+thread는 동시에 같이 출력하기 때문에 섞여서 나오게 된다.
+(즉,start를 쓸 경우main method의 흐름에 따라서 실행 되지 않고 thread는 자신의 작업 진행순서에 따라 독자적으로 실행된다.
+준비 시작 경기종료 출력후 thread 출력된다.)
+   @Override
+	public void run() {
+		for (int i = 0; i < 100; i++) {
+			System.out.println(Thread.currentThread().getName() + ":" + i+"미터 달리는 중");
+		
+		
+		}
+	}
+
+   
+ public static void main(String[] args) {
+		ThreadEx2 th1= new ThreadEx2("천둥이");
+		ThreadEx2 th2= new ThreadEx2("흑설탕");
+		System.out.println("준비~");
+		System.out.println("시작~");
+
+ 
+       
+*객체이름.join();
+main method의 흐름에 동참하도록 만들기.
+start가 아닌 join(!)을 써주면 된다.대신 try catch로 해주어야 한다.	
+ 	
+
+try {                      
+			th1.join();               
+			th1.join();                 
+                                               
+		} catch (InterruptedException e) {
+        	
+			
+			e.printStackTrace();
+		}
+        
+        System.out.println("경기종료~");
+    }                              
+}
+   
+   
+   
+   
+   
+   Runnable 구현 방법 
+   
+   1)
+   Runnable class를 구현한다.
+   2)
+   run() override를 한다. 
+   3)
+   변수 선언을 한다. 
+   4)
+   thread class를 instance 한다. 
+   5)
+   객체이름.start();를 한다. 
+   
+   *Runnable의 단계가 더 복잡한데 그래도 사용하는 이유 ?
+   java에선 상속은 하나의 class 밖에 못하지만 구현은 여러가지를 할 수 있어서 
+   사용의 제약이 적다. 
+   
+   
+   ex)
+  public class ThreadEx3 implements Runnable {
+	String name;
+
+	ThreadEx3(String name) {
+		this.name = name;
+
+	}
+
+	@Override
+	public void run() {
+		
+		for (int i = 0; i <= 100; i++) {
+			System.out.println(name + ":" +i+ "미터 달리는 중");
+
+		}
+
+	}
+
+	
+	public static void main(String[] args) {
+ 	ThreadEx3 r1 = new ThreadEx3("토끼");
+ 	ThreadEx3 r2 = new ThreadEx3("토끼");
+ 	
+ 	Thread th1 = new Thread(r1);
+ 	Thread th2= new Thread(r2);
+ 	
+ 	th1.start();
+ 	th2.start();
+	}
+}
+   
