@@ -1,0 +1,108 @@
+배열로 로또 만들기
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class Lotto4 extends JFrame implements ActionListener {
+	JButton[] btn = new JButton[6];
+	JButton btn7;
+	ImageIcon img[] = new ImageIcon[45];
+	Number2 num;
+
+	int x = 0;
+
+	Lotto4(String name) {
+		super(name);
+		setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBounds(350, 130, 700, 500);
+		for (int i = 0; i < img.length; i++) {
+			img[i] = new ImageIcon("src/images/ball" + (i + 1) + ".png");
+
+		}
+		btn7 = new JButton("시작");
+
+		for (int i = 0; i < 6; i++) {
+			btn[i] = new JButton(img[i]);
+			btn[i].setBounds(60 + x, 100, 100, 200);
+			x += 100;
+			add(btn[i]);
+
+		}
+
+		btn7.addActionListener(this);
+		btn7.setBounds(140, 400, 400, 20);
+		add(btn7);
+
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		Lotto4 lt = new Lotto4("로또");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		num = new Number2(img, btn);
+		num.start();
+		
+		
+
+	}
+
+}
+
+
+
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+public class Number2 extends Thread {
+	ImageIcon img[] = new ImageIcon[45];
+	JButton btn[] = new JButton[6];
+
+	
+
+	public Number2(ImageIcon[] img, JButton[] btn) {
+		
+		super();
+		this.img = img;
+		this.btn = btn;
+	}
+
+
+
+	@Override
+	public void run() {
+		
+		
+		
+		Random rnd= new Random();
+	      System.out.println(rnd.nextInt(45));
+	      
+	      for (int i = 0; i < 5; i++) {
+			btn[0].setIcon(img[rnd.nextInt(45)]);
+			btn[1].setIcon(img[rnd.nextInt(45)]);
+			btn[2].setIcon(img[rnd.nextInt(45)]);
+			btn[3].setIcon(img[rnd.nextInt(45)]);
+			btn[4].setIcon(img[rnd.nextInt(45)]);
+			btn[5].setIcon(img[rnd.nextInt(45)]);
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		 
+	      }
+
+	}
+
+}
