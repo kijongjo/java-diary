@@ -1,0 +1,34 @@
+Buffered?
+BufferedInputStream 객체이름 = new BufferedInputStream(file class 객체 이름);
+BufferedOutputStream 객체이름 = new BufferedInputStream(file class 객체 이름);
+bis : buffer + file 접근 기능 두가지를 모두 사용할 수 있다. 기존기능에 계속 옵션을 추가해 같이사용할 수잇다. 
+buffer의 장점과 file의 기능을 합쳐서 
+많은 양의 데이터를 처리하게 될때 효과를 발휘 한다. 효율적으로 처리하기 위해 메모리 상에 모아 두었다가 한번에 처리하기 때문에 
+file로 보내는 글자등의 정보가 적은경우엔 특정 method를 써서  밀어 보내야 한다. 
+
+method
+.flush();
+buffer를 전부 채우지 않고 중간에 보내고자 할때 사용하는 method이다. 
+
+
+
+ex)
+  File f=  new File("D:\\Hello.java");
+  File f2 = new File("D:\\Hello4.java");
+  FileInputStream fis = new FileInputStream(f);
+  FileOutputStream fos = new FileOutputStream(f2);
+   //BufeedInputStream(InputStream in);
+   //inputStream 객체와 후손 객체를 의미한다. 
+   BufferedInputStream bis = new BufferedInputStream(fis);
+	//bis : buffer + file 접근 기능 두가지를 모두 사용할 수 있다. 기존기능에 계속 옵션을 추가해 같이사용할 수잇다. 
+   BufferedOutputStream bos = new BufferedOutputStream(fos);
+   int value=0;
+   while((value=bis.read())!=-1){
+	   bos.write(value);
+	   System.out.print((char)value);      //큰파일을 읽어들이면 이게더 빨라진다.
+   }                                    
+   bos.flush(); // 디스크에 저장이 될수 있도록 넣어주어야한다 . buffer라는것은 한번에 모아서 내려써야 속도가 빨라지기 때문이다. 
+                                                             그래서 모아서 보내는데 중간에 보내고싶으면 flush를 써준다.
+	
+	}
+}
