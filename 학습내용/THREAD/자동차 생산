@@ -1,0 +1,19 @@
+4개의 클래스가 필요하다 1개의 일반 class 2개의 Thread class 1개의 출력 class  
+1.자동차를 생산,저장,출고 기능이 있는  Car class 
+2.Car에서 정보를 받아와 run method에서   Car의 ArrayList에 차를 넣는 기능이 있는 Producter class
+3.Car에서 정보를 받아 run method에서 car의 Array List에 있는 차를 한 대 뽑는 Customer Thread class
+4.1.2.3.을 instance 하고 thread를 실행하는 ProducterCustomer class
+
+
+1.자동차를 생산,저장,출고 기능이 있는  Car class 
+1)<String>general Collection인 ArrayList<String>을 member 변수로 설정,차이름을 가진 String 배열을 member 변수로 설정
+2)기본 생성자에서 Arraylist class instance
+3)자동차 이름을 얻어오는 getCarName String getter method 생성
+
+
+
+
+
+2.Car에서 정보를 받아와 run method에서   Car의 ArrayList에 차를 넣는 기능이 있는 Producter class
+3.Car에서 정보를 받아 run method에서 car의 Array List에 있는 차를 한 대 뽑는 Customer Thread class
+4.1.2.3.을 instance 하고 thread를 실행하는 ProducterCustomer class
