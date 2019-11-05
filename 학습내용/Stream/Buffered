@@ -43,3 +43,9 @@ ex)
 	
 	}
 }
+
+*Buffered의 생성자 특징 
+BufferedInputStream(InputStream in)
+
+매개변수로 inputstream in이 올수 있다. 그런데 inputstream은 추상class이다. 이 말인 즉슨 inputstream의 자식 class 객체가 bufferedinputstrem에
+올 수 있다는 말이다 .
