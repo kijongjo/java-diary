@@ -1,0 +1,19 @@
+FileoutputStream?
+FileOutputStream 객체이름 = new FileOutputStream(file class의 객체);
+outputstreamd의 자식 calss로 eclipse에서 정보를 입력하면 해당 파일에 글자가 저장된다. 
+
+method
+.write(아스키코드 or 배열);
+아스키 코드를 쓰게 되면 파일에 문자로 변환되어 들어간다. 
+배열을 넣으면 배열에 있는 글자가 전부 들어간다. 
+
+ex)
+byte[] b = { 'j', 'a', 'v', 'a' };
+
+		File f = new File("D:\\javout.txt");
+		// 자바에서 외부로 내보내기(파일로) 전용 클래스
+		// file outputStream
+
+		FileOutputStream fos = new FileOutputStream(f);
+		//fos.write(112);  //<-아스키 코드 값으로 썻으며 파일이 없으면 생성후에  만들어진 파일에 글자를 쓴다.
+		fos.write(b);     //<-b는 배열이고 배열을 넣어준다. 
