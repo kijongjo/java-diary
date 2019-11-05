@@ -1,0 +1,25 @@
+Filewriter? 
+FileReader 객체이름 = new FileReader(file 객체 이름);
+2바이트씩 정보를 처리하는 writer의 하위 class이다. 
+
+
+
+
+ex)
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class IOEx4 {
+	public static void main(String[] args) throws IOException {
+
+		File f = new File("D:\\Hello.java");
+		FileReader fr = new FileReader(f);
+
+		int value = 0;
+		while ((value = fr.read()) != -1) {
+			System.out.print((char) value);
+		}
+	}
