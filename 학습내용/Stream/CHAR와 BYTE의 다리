@@ -1,0 +1,12 @@
+
+byte stream을 char stream으로 바꾸는 다리역할?
+
+1)inputstream reader
+이것은 reader의 후손이다. 즉 character stream이란 얘기이다. 그런데 생성자의 매개변수로 byte stream을 가진다.
+
+2)outputsteam reader
+
+
+
+
+
