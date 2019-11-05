@@ -24,3 +24,16 @@ public class IOEx5 {
 	
 	}       
 }
+
+
+
+
+
+
+
+*String을 읽는 method? 
+.readLine(); 
+readLine();의 끝을 알리는 수는 NULL이다 . 이것은 설계자의 재량으로 정하는 것이다. 
+
+
+
