@@ -1,0 +1,30 @@
+Stream 정의?
+I/0 => Stream(시냇물)과 같다.
+
+특징 1. 시냇물 처럼 단방향성 한쪽방향으로만 진행이 된다. 
+     2. 느리다.
+
+
+
+
+종류 
+1.byte stream 
+1)InputStream(받아들이는 최상위 클래스)   <-추상 클래스 자식들에게 기능 줌
+한바이트씩 받음
+FileInputStream 자식 class
+파일을 읽어 옴
+
+read()추상 method 존재
+ 다양하게 읽어올 수 있는 기능 
+2)OutputStream(보내는 최상위 클래스)       <-추상 클래스 자식들에게 기능 줌 
+한바이트씩 받음 
+FileOutputStream 
+파일을 저장
+
+write()추상 method 존재 
+2.char stream 
+16bit 
+
+2)char stream 
+
+
