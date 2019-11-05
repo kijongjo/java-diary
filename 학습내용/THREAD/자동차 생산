@@ -9,11 +9,97 @@
 1)<String>general Collection인 ArrayList<String>을 member 변수로 설정,차이름을 가진 String 배열을 member 변수로 설정
 2)기본 생성자에서 Arraylist class instance
 3)자동차 이름을 얻어오는 getCarName String getter method 생성
+4) 생산된 차를 Arraylist에 집어넣는 push method 생성 단 synchronized로 구성한다.
+5 고객에게 car를 주고 Arraylist 목록에서 빼오는 pop method 생성 단 synchronized로 구성한다. 
+import java.util.ArrayList;
+import java.util.Random;
+
+//자동차
+public class Car {
+	// String 클래스만 담을 수 있는 전용 object 배열
+
+	ArrayList<String> list;
+	String[] carNameList = { "붕붕카", "포르쉐", "히트", "코란도" };
+
+	public Car() {
+		list = new ArrayList<String>();
+
+	}
+
+//자동차 이름을 얻어오기 
+	public String getCarName() {
+		String carName = null;
+		Random rnd = new Random();
+		return carNameList[rnd.nextInt(4)];
+
+	}
+
+//차량을 생성에 넣는 메소드 push()
+	public synchronized void push(String car) {
+		System.out.println("현재 차고 상태 : " + list);
+		System.out.println("자동차가 생산되었습니다 ." + car);
+		list.add(car);
+		// 자고 있는 호갱님 일어나세요~
+		// this.notify();//하지만 기다린 순서가아닌 늦게 온 애들이 받을 수도 있다.
+		this.notifyAll();// 전부 다 깨우기 하지만 순서를 기억하기 때문에 이걸 써야한다.
+							// 중요한것은 notify wait등을 쓰고자 한다면 둘다 synchronized를 써주어야한다.
+	}
+
+	public synchronized String pop() {
+		String carName = null;
+		System.out.println("현재 차고 상태:" + list); // Exception in thread "Thread-1"
+												// java.lang.ArrayIndexOutOfBoundsException: -1고치기
+		if (list.size() == 0) { // if문으로 고친다. 차고가 0인데 고객이 사려고해서 오류가 난것이다.
+			System.out.println("차고에 차량이 없습니다. 잠시기다리세요");
+			try {
+				this.wait();// <-기다리라는 클래스 car에서 wait(); <-object method에 있다. //위에 자고 있는 호갱님 일어나세요~부분을보기
+							// 생산되었다는 것을 고객에게 알려주는것
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		carName = list.remove(list.size() - 1);
+		System.out.println("자동차가 출고되었습니다: 차이름" + carName);
+		return carName;
+
+	}
+	// 꺼내는 메소드 pop
 
 
 
 
+2. Car에서 정보를 받아와 run method에서   Car의 ArrayList에 차를 넣는 기능이 있는 Producter class
+1) car class를 매개변수로 가지는 생성자를 생성 
+2)thread 상속시키고 run override
+3)차이름을 얻어와 String class 객체에 대입 후 car Arraylist에 있는 자동차를 내보내는 push 기능을 for와 try catch로 연결시킨다.
+public class Producter extends Thread {
+	//생성자에서만 정보를 받아오고 Car class 자체에는 영향을 못주도록 잠궈놓는 것. 
+	private Car car;
 
-2.Car에서 정보를 받아와 run method에서   Car의 ArrayList에 차를 넣는 기능이 있는 Producter class
-3.Car에서 정보를 받아 run method에서 car의 Array List에 있는 차를 한 대 뽑는 Customer Thread class
-4.1.2.3.을 instance 하고 thread를 실행하는 ProducterCustomer class
+	Producter(Car car) {
+		this.car = car; 
+
+	}
+
+	@Override
+	public void run() {
+		// 2초마다 1대 생산
+		// thread.sleep(2000);
+		// 차량이름 얻어오기
+		for (int i = 0; i < 20; i++) {
+
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			String carName = car.getCarName();
+			// 만든차 차고에 넣기
+			car.push(carName);
+		}
+	}
+3. Car에서 정보를 받아 run method에서 car의 Array List에 있는 차를 한 대 뽑는 Customer Thread class
+4. 1.2.3.을 instance 하고 thread를 실행하는 ProducterCustomer class
