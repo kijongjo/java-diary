@@ -1,0 +1,68 @@
+File clss 
+File 객체 이름 = new File("주소") 주소를 따라 들어가 파일이 있는지 찾아온다. boolean 값으로 return 된다. 
+
+ex)
+File f = new File("D:\\Hello2.java");       <-주소를 쓸 때에는 \\를 써주어야한다.
+*주의할 점 .
+window 10의 c드라이브는  보안상 막혀있을 확률이 있으니 불러오고자 하는 파일은 
+D드라이브에 저장해준다. 
+
+File method
+.exists();
+파일이 존재하는지 여부를 묻는 method 
+.createNewFile(); 
+instance시 생성자에 적은 경로로 파일을 생성한다. 
+*주의할 점.
+createNewFile();만 쓰게 되면 오류가 나오는데 이유가 만약 경로가 
+없는 경로다라고 하면 exception 오류가 나오기 때문에 try catch문을 해주어 오류상황일 경우를 알려 주어야 
+한다. IOException을 통해 던질 수도 있다. 
+
+ex)
+
+		if (!f.exists()) {                   <- 만약 파일이 존재하지 않다면 파일을 생성하라  
+		 f.createNewFile();
+			System.out.println("파일을 생성합니다.");
+		} else {
+			System.out.println("파일이 존재합니다.");
+		}
+
+.getAbsolutePath(); 
+절대 경로를 보여준다. 드라이브부터 쓰는것(ex: c:\\ , d:\\) 즉 뿌리부터 보여준다 .
+
+
+ex)
+String path = f.getAbsolutePath(); // <-절대 경로
+		System.out.println("파일 경로:" + path);
+    
+.isxxx()
+해당 data가 무엇인지 알려주는 method boolean 값을 return 한다 .
+즉 디렉토리를 물어보면 디렉토리인지 아닌지 알 수있다. 
+
+
+
+ex)
+if (f.isDirectory()) {
+			System.out.println("파일 입니다.");
+		}
+		if (f.isDirectory()) {
+			System.out.println("디렉토리입니다.");
+		}
+    
+ 
+ 
+ .list();
+ 디렉토리에 들어있는 파일을 배열로 retrun해준다. 
+ 
+ ex)
+ File f2 = new File("D:\\eclipse");
+		if (f2.isDirectory()) // <-디렉토리인지 아닌지 알수 있다.
+			System.out.println("디렉토리 입니다.");
+	     String[] list =  f2.list();//list() method :현재 디렉토리의 파일 목록을 배열로 return 해준다.
+	    for(String x:list) {  
+	    	System.out.println(x);
+	    }
+    
+
+
+
+
