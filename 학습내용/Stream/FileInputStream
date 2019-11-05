@@ -1,0 +1,34 @@
+FileinputStream?
+FileInputStream 객체이름 = new FileInputStream(File class 객체);
+파일에 접근 할 수 있는 inputstream의 자식 class이다. 
+파일에 접근해 적혀져 있는 정보를 eclipse 내에서 출력하게 한다. 
+
+method
+.read();
+경로를 따라들어가 파일을 열어서 정보를 가지고와 문자라면 ascii 코드값으로 저장한다. 
+한글자씩 따온다. 
+
+ex)
+
+File f = new File("D:\\Hello2.java");
+		FileInputStream fis = new FileInputStream(f); // 파일에 접근할 수 있는 능력이 있는 것 inputstream의 자식
+		int value = fis.read();
+		char ch = (char) value;/// hello.java들어가서 첫번째 글자를 따온다. ascii코드로 가지고와 112가 출력된다 . p가 112
+				System.out.println(ch); 				// 그것을 형변환해 출력한다.
+		
+    
+    
+    
+*만약 1글자가 아닌 여러 글자를 따오고자 한다면 
+EOF문자를 활용해야한다. 
+파일의 끝을 나타내는 문자로 READ의 경우 파일의 끝에 도달하게 되면 -1를 출력한다. 
+
+  while ((value = fis.read()) != -1) {   //<-전부 읽어오게하기  -1은 read에서 eof를 말하는데 -1이 나오기 전까지 읽어오라는 말이다 .
+			
+	System.out.print((char) value); 
+  
+  
+  
+  
+  
+  
