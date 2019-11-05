@@ -13,18 +13,27 @@ I/0 => Stream(시냇물)과 같다.
 한바이트씩 받음
 FileInputStream 자식 class
 파일을 읽어 옴
-
+1-2)
+Buffered inputstream
 read()추상 method 존재
  다양하게 읽어올 수 있는 기능 
 2)OutputStream(보내는 최상위 클래스)       <-추상 클래스 자식들에게 기능 줌 
 한바이트씩 받음 
 FileOutputStream 
 파일을 저장
-
 write()추상 method 존재 
+
+2-2)
+Buffered outputstream
+
+
 2.char stream 
 16bit 
+1byte가 아닌 2byte씩 읽거나 써서 한글 같은 2byte 문자도 사용가능하게 하는 종류 
+1)reader 
+1-1)file reader 
+1-2)bufferedreader
 
-2)char stream 
-
-
+2)writer
+2-1)file writer
+2-2)bufferedwriter
