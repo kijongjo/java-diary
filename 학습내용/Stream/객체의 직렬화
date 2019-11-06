@@ -1,0 +1,133 @@
+직렬화 ? 
+class 이름 implements Serializable{}
+특정 class를 만들고 출력 class에서 io를 통해 특정 class의 객체를 불러 오고자 할 때 객체에 대한 class 정보를 io에 맞게 변형시켜 출력
+클래스에 가져와야한다.
+
+
+ex)
+객체 class
+import java.io.Serializable;
+
+public class Member implements Serializable {
+	private String id, pw, name, addrs, email;
+	private transient int age; //<-객체를 저장할때 문서에 이 변수는 저장하지 않도록 하는 keyword transient
+	
+  // setter,getter,
+
+	Member() {
+
+	}
+
+	public Member(String id, String pw, String name, String addrs, String email, int age) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.addrs = addrs;
+		this.email = email;
+		this.age = age;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPw() {
+		return pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddrs() {
+		return addrs;
+	}
+
+	public void setAddrs(String addrs) {
+		this.addrs = addrs;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	// 기본생성자,매개변수 있는 생성자
+
+}
+
+저장하는 class
+package day19;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+//회원정보를 저장하고 읽기 
+public class IOEx12 {
+	public static void main(String[] args) throws IOException {
+
+		// 멤버 객체를 생성하여 D:\\member.txt 파일에 저장
+
+		Member m1 = new Member("aa", "bbb", "hong", "율도국", "hong@gamil.com", 20);  <-매개변수있는 생성자에 값 대입
+
+		FileOutputStream fos = new FileOutputStream("D:\\member1.txt");               <-파일 저장 경로
+		ObjectOutputStream oos = new ObjectOutputStream(fos);                         <-경로에 연결되는 object를 만들어냄
+		oos.writeObject(m1);                                                          <-m1객체의  정보를 파일에 넣음
+
+	}
+
+}
+
+출려 class
+package day19;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class IOEx13 {
+public static void main(String[] args) throws IOException, ClassNotFoundException {
+	File f= new File("D:\\member1.txt");
+	
+	//FileInputStream
+	FileInputStream fis = new FileInputStream(f);   <-해당 경로의 파일을 가지고 옴 
+	//objectInputStream
+   ObjectInputStream ois = new ObjectInputStream(fis); <-가져온 정보를 객체화함
+   Object obj = ois.readObject();
+   System.out.println(obj);
+   Member m = (Member)obj;                        <-memberclass로 형변환 method를 쓰기위함 
+   System.out.println("이름: "+m.getName());          <-getter method로 return값 얻어온후 출력
+   System.out.println("이름: "+m.getId());
+   System.out.println("이름: "+m.getPw());
+   System.out.println("이름: "+m.getAddrs());
+   System.out.println("이름: "+m.getEmail());
+   System.out.println("이름: "+m.getAge());
+}
+}
