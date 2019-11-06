@@ -103,7 +103,7 @@ public class IOEx12 {
 
 }
 
-출려 class
+출력 class
 package day19;
 
 import java.io.File;
@@ -119,15 +119,22 @@ public static void main(String[] args) throws IOException, ClassNotFoundExceptio
 	//FileInputStream
 	FileInputStream fis = new FileInputStream(f);   <-해당 경로의 파일을 가지고 옴 
 	//objectInputStream
-   ObjectInputStream ois = new ObjectInputStream(fis); <-가져온 정보를 객체화함
+   ObjectInputStream ois = new ObjectInputStream(fis);  <-가져온 정보를 객체화함
    Object obj = ois.readObject();
    System.out.println(obj);
-   Member m = (Member)obj;                        <-memberclass로 형변환 method를 쓰기위함 
-   System.out.println("이름: "+m.getName());          <-getter method로 return값 얻어온후 출력
+   Member m = (Member)obj;                              <-memberclass로 형변환 method를 쓰기위함 
+   System.out.println("이름: "+m.getName());            <-getter method로 return값 얻어온후 출력
    System.out.println("이름: "+m.getId());
    System.out.println("이름: "+m.getPw());
    System.out.println("이름: "+m.getAddrs());
    System.out.println("이름: "+m.getEmail());
    System.out.println("이름: "+m.getAge());
 }
-}
+ 
+*Transient?
+transient 데이터 타입 변수이름;
+직렬화 대상에서 제외 하라는 명령어 
+객체를 저장할때 문서에 이 변수는 저장하지 않도록 하는 keyword transient
+
+
+
