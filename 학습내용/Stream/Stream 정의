@@ -17,23 +17,44 @@ FileInputStream 자식 class
 Buffered inputstream
 read()추상 method 존재
  다양하게 읽어올 수 있는 기능 
+1-3)
+Data inputstream 
+Primitive type을 다룬다 .
+1-4)
+Object inputStream
+Object를 다룬다.
+
 2)OutputStream(보내는 최상위 클래스)       <-추상 클래스 자식들에게 기능 줌 
 한바이트씩 받음 
 FileOutputStream 
 파일을 저장
 write()추상 method 존재 
-
 2-2)
 Buffered outputstream
-
+2-3)
+DataoutputStream
+2-4)Printwriter
 
 2.char stream 
 16bit 
 1byte가 아닌 2byte씩 읽거나 써서 한글 같은 2byte 문자도 사용가능하게 하는 종류 
-1)reader 
-1-1)file reader 
-1-2)bufferedreader
+1)
+reader 
+1-1)
+file reader 
+1-2)
+bufferedreader
 
-2)writer
-2-1)file writer
-2-2)bufferedwriter
+2)
+writer
+2-1)
+file writer
+2-2)
+bufferedwriter
+2-3)
+PrintWriter
+
+*2바이트씩 처리하는 char를 쓰면 되는데 왜 byte를 사용할까?
+글자를 처리할 때만 거의 char를 사용한다. byte는 하의 class의 
+종류가 많아 할 수 있는 것이 많다. 글자를 제외한 이미지 등을 모두 
+byte로 처리한다. 
