@@ -18,7 +18,7 @@ public class IOEx9 {
 		// byte --> char 계열로 바꿔주어야한다 .
 
 		InputStreamReader isr = // 이것은 reader의 후손이다 즉 character stream이란 얘기이다. 그런데 생성자의 매개변수로 byte stream을 가진다.
-				new InputStreamReader(System.in);
+				new InputStreamReader(System.in);       <-System.in에서 입력받은 값을 굳이 다리를 놓아야 하는 이유는 system.in은 inputstream이기 때문이다. 
               BufferedReader br = new BufferedReader(isr);
               //한글을 파일에 저장 하려고 한다. 
               FileWriter fw = new FileWriter("D:\\ddd.txt");
