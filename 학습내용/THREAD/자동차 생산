@@ -52,7 +52,7 @@ public class Car {
 		if (list.size() == 0) { // if문으로 고친다. 차고가 0인데 고객이 사려고해서 오류가 난것이다.
 			System.out.println("차고에 차량이 없습니다. 잠시기다리세요");
 			try {
-				this.wait();// <-기다리라는 클래스 car에서 wait(); <-object method에 있다. //위에 자고 있는 호갱님 일어나세요~부분을보기
+				this.wait();       <-기다리라는 클래스 car에서 wait(); <-object method에 있다. //위에 자고 있는 호갱님 일어나세요~부분을보기
 							// 생산되었다는 것을 고객에게 알려주는것
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
