@@ -1,0 +1,16 @@
+NETWORK를 하기 위해 필요한것 
+1.OS가 있어야한다.
+2.PROTOCAL이 있어야한다. (통신 규약)
+ ex)TCP/IP  =>라우터 통과 할 수 있다. (외부로 나갈때)
+    udp
+    ipx/spx => 라우터 통과 할 수 없다.(한지역에서 할 때)  <-성능이 좋다.
+    
+  
+JAVA내에서 연결을 위해 필요한 것 
+
+ 통신할때 socket을 통해 컴퓨터와 컴퓨터를 연결한다. 
+데이터 통신은 io로 한다. 
+
+client -socket 필요
+server - client soket , accept 필요
+
