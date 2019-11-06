@@ -11,8 +11,88 @@ socket instance 생성(server ip,포트번호);
 출력 기능만 있는 PrintWriter 생성후 .println("쓰고싶은글")method를 통해 정보를 보냄
 
 
+ex)
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+//CLIENT
+public class NetEx2 {
+	public static void main(String[] args) {
+		// 특정 서버에 접속해 보기
+		// 192.168.0.35 <<========
+		try {
+			Socket s = new Socket("192.168.0.35", 5000);// 5000은 포트번호 포트번호는 일종의 문이다. 계속 두드림
+		   System.out.println(s);
+		  OutputStream os = s.getOutputStream();//연결되어 있는 소켓에 나가는 method를 연결함.
+		  OutputStreamWriter osw = new OutputStreamWriter(os);
+		  BufferedWriter bw = new BufferedWriter(osw);
+		  PrintWriter pw = new PrintWriter(bw);
+		  pw.println("alpengdalpeng");
+		  pw.flush();
+		} catch (UnknownHostException e) {
+			System.out.println("잘못된 ip 주소");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("접속 실패");
+		} 
+	}
+}
+
 
 Server class 만들기
+1)
+serverSocket(포트번호) 을 만든다.
+2)
+socket 객체를 만들고 서버객체.accept(); 기능을 준다.
+3)
+InetAddress class에서 클라이언트 소켓.getInetAddress();을 통해 ip값을 받는다. 
+4)
+InputStream과 getInputStream();으로 client가 보낸 메세지를 받는다.
+5)
+Reader 기능을 통해 읽는다. 
+
+
+
+ex)
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+//HOST
+public class NetEX3 {
+	public static void main(String[] args) {
+		try {
+			System.out.println("사용자 접속 기다리는중..");
+			ServerSocket ss = new ServerSocket(3000);
+			Socket client;
+			client = ss.accept();
+			InetAddress inet = client.getInetAddress();
+			System.out.println("클라이언트 ip:" + inet.getHostAddress());
+			System.out.println("클라이언트 접속성공");
+			InputStream is = client.getInputStream(); // 클라이언트가 보낸 것을 받아옴
+			InputStreamReader isr = new InputStreamReader(is); // 읽기 쉽도록 다리역할 한글도 가능하게
+			BufferedReader br = new BufferedReader(isr);
+			String msg = null;
+			while((msg = br.readLine())!=null) {
+			System.out.println(msg);
+			} 
+			   
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+}
+
 
 
 
