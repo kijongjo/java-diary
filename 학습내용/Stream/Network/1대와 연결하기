@@ -1,0 +1,19 @@
+Client class 만들기 
+
+step
+1)
+socket instance 생성(server ip,포트번호);
+2)
+연결되어 있는 소켓에 나가는 stream method 입력
+3)
+나가는 stream method에 글을 보내는 stream writer와 성능이 더 좋은 buffer 생성
+4)
+출력 기능만 있는 PrintWriter 생성후 .println("쓰고싶은글")method를 통해 정보를 보냄
+
+
+
+Server class 만들기
+
+
+
+
