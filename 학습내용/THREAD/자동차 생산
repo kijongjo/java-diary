@@ -102,4 +102,59 @@ public class Producter extends Thread {
 		}
 	}
 3. Car에서 정보를 받아 run method에서 car의 Array List에 있는 차를 한 대 뽑는 Customer Thread class
+1)
+car class를 멤버변수로 가지고 car class를 매개변수로 가지는 일반 생성자 를 만든다. 
+2)class를 thread에 상속한후 run override를하고나서 car arraylist에 있는 car name을 하나 씩 빼 string class에 대입한다. 
+
+import java.util.Random;
+
+public class Customer extends Thread {
+	Car car;
+    Random rnd=new Random();
+	Customer(Car car) {
+		this.car = car;
+
+	}
+
+	@Override
+	public void run() {
+	 //20 차량을 구매 
+		for (int i = 0; i < 10; i++) {
+			
+		
+		try {
+			Thread.sleep(rnd.nextInt(3)*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String carName=car.pop();
+		}
+		}
+}
+
 4. 1.2.3.을 instance 하고 thread를 실행하는 ProducterCustomer class
+1)
+car instance 형성
+2)
+producter instance 형성 후 car 정보 대입
+3)
+customer instance 형성 후 car 정보 대입
+
+public class ProducterCustomerEx {
+	public static void main(String[] args) {
+   Car car= new Car();
+   //자동차 회사 
+   
+   Producter p = new Producter(car);
+   //고객
+   Customer c= new Customer(car);
+   
+   
+   p.start();
+   
+   c.start();
+   }
+}
+
+
