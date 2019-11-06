@@ -1,0 +1,50 @@
+Inet? 
+ip와 network관련 class
+
+method?
+.getLocalHost();
+컴퓨터의 정보를 얻을 수 있다.
+
+.getHostAddress();
+getLocalHost();를 통해 정보를 입력 받은 상태에서 
+주소를 불러온다. 
+
+.getHostName();
+getLocalHost();를 통해 정보를 입력 받은 상태에서
+컴퓨터의 이름을 알 수가 있다. 
+
+.getByName("주소"); 
+해당 주소의 정보를 얻어 올 수 있다. 
+또한 위의 HostAddress,Name을 쓸 수가 있다. 
+
+
+ex)
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class NetEx1 {
+	public static void main(String[] args) throws UnknownHostException {
+		// 현재 내 pc의 ip 192.168.0.52 //DESKTOP-PBIQ42H
+		InetAddress inet = InetAddress.getLocalHost();
+		System.out.println(inet.getHostAddress());
+		System.out.println(inet.getHostName());
+		// 네이버의 ip
+		InetAddress inet2 = InetAddress.getByName("www.naver.com");
+		System.out.println(inet2.getHostAddress());
+		System.out.println(inet2.getHostName());
+
+		InetAddress [] inet3 = InetAddress.getAllByName("www.naver.com");     <-주소가 여러개일 수 있는데 배열로 받아와 출력할 수 있다.
+	for (InetAddress x : inet3) {
+		System.out.println(x.getHostAddress());
+		System.out.println(x.getHostName());
+	}
+		
+	}
+}
+
+
+
+
+
+
+
