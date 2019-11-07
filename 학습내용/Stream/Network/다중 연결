@@ -1,0 +1,122 @@
+
+step
+기본적으로 두개의 server 관련 class가 필요하다.
+1.일반 서버를 담당하는 class 
+1)
+client와 만날 수 있도록 serversocket 객체를 생성.생성된 serversocket을 instance함 .
+key point2)3)
+2)
+client의 정보를 받을 수 있는 socket class를 만든 후 한번 시도가 아닌 여러번 시도 할 수 있도록 wi
+while문으로 감싼다. while문으로 받는 기능을 감싸서 계속 받을 수 있는 상태가 되는 것이 관건이다. 
+
+3)
+client의 정보를 받은 후 일반 server를 담당하는 class에서 상호작용과 관련된 기능을 넣지 말고 통신을 담당하는 
+multithread 기능을 가진  class에서 받은 client 정보를 처리할 수 있도록 넘긴다.
+thread는 정보를 받으면 계속해서 생기고 자신이 준비가 되었을 때 진행하게 된다. 
+4)
+try catch문으로 감싸 오류가 났을 때의 대처를 할 수 있도록 한다. 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class MultiServer {
+public static void main(String[] args) {
+	ServerSocket ss;
+	try {
+		ss = new ServerSocket(5000);
+		while(true) {
+		System.out.println("클라이언트 접속 대기중..");
+		Socket client=ss.accept();
+		System.out.println(client.getInetAddress().getHostAddress());
+		//멀티쓰레드 처리 
+		//통신을 담당 -->MTServer thread class를 만들어 주어야 한다. 
+		MTServer ms =new MTServer (client);
+		ms.start();
+		
+		}
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+}
+
+2.통신을 담당하는데 여러명의 client와 통신 할 수 있도록 하는 multi thread 역할을 하는 class 
+keypoint 1)
+1)
+thread를 상속하고 run method를 override한다.
+2)
+1.class에서 client의 정보를 받을 수 있도록 Socket client를 매개변수로 가지는 일반 생성자를 만든다. 
+3)
+InetAddress class에서 getInetAddress();와 getHostAddress();를통해 사용자의 ip를 얻어온다. 
+4)
+정보를 주고받을 수 있도록 input,output,writer,reader class 설정을 적절히 해준다.
+5)
+client로부터 받은 정보를 가공해 출력한다. 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class MTServer extends Thread {
+	Socket client;
+
+	MTServer(Socket client) {
+		this.client = client;
+	}
+
+	@Override
+	public void run() {
+		// 동시에 처리할 코드
+		// 모든 클라이언트와 통신을 담당하는 코드
+		// 1.접속자 사용자의 ip출력
+		InetAddress inet = client.getInetAddress();
+		String ip = inet.getHostAddress();
+		System.out.println("사용자 : " + ip);
+
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+
+			// 발신부
+			OutputStream os = client.getOutputStream();
+			OutputStreamWriter osw = new OutputStreamWriter(os);
+			BufferedWriter bw = new BufferedWriter(osw);
+			// 다양한 자료형을 출력하기 편하게 PrintnWriter
+			PrintWriter pw = new PrintWriter(bw);
+
+			// 클라이언트로부터 값 읽어오기
+			String msg = null;
+			while ((msg = br.readLine()) != null) {
+				System.out.println("[" + ip + "]:" + msg);
+			//다시 클라이언트에서 전송 
+				pw.println(msg);
+				pw.flush();
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
