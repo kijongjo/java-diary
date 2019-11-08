@@ -6,5 +6,375 @@ client class1개 server class 1개가 필요하다.
   이후에 chatting 판넬이 보여지도록 설정한다.
 3)send 버튼과 엔터키를 누르면 text가 printwriter에 의해 다루어지도록하는 send method를 만든다.
 4)run method에서 받은 text가 printwriter에 의해 처리 되도록 하기 위해 printwriter의 경로를 socket과 연결한다. 
+  또한 bufferedreader를 통해 받아온 정보도 읽어와 text area에 붙인다. 
+  package day20;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class ChatClient extends JFrame implements ActionListener, KeyListener,Runnable{
+	JPanel jp1, jp2;
+	CardLayout cl;
+	JLabel jlbIp, jlbPort;
+	JButton jbtnLogin, jbtnExit;
+	JButton jbtnSend;
+	JTextField jtfIp, jtfPort;
+	JScrollPane jsp;
+	JPanel jpSouth;
+	JTextField jtf;
+	JTextArea jta;
+	int port;
+	String ip;
+	Socket s;
+	BufferedReader br;
+	PrintWriter pw;
+	
+	public ChatClient () {
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//컴포넌트 초기화
+		jp1 = new JPanel();
+		jp2 = new JPanel();
+		
+		jpSouth = new JPanel();
+		jtf = new JTextField(40);
+		jta = new JTextArea();
+		jsp = new JScrollPane(jta, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+		jbtnSend = new JButton("전송");
+		jpSouth.add(jtf);
+		jpSouth.add(jbtnSend);
+		
+		jp2.setLayout(new BorderLayout());
+		jp2.add(jsp, "Center");
+		jp2.add(jpSouth,"South");
+
+		jlbIp = new JLabel("IP");
+		jlbPort = new JLabel("PORT");
+		jbtnLogin = new JButton("로그인");
+		jbtnExit = new JButton("종료");
+		jtfIp = new JTextField("192.168.0.35");
+		jtfPort = new JTextField("5000");
+		
+		
+		//첫번째 로그인 화면의 배치관리자를 사용하지 않늗나.
+		jp1.setLayout(null);
+		//모든 컴포넌트의 크기와 위치 지정
+		jlbIp.setBounds(50,100,100,50);
+		jlbPort.setBounds(50,300,100,50);
+		jtfIp.setBounds(250,100,150,50);
+		jtfPort.setBounds(250,300,150,50);
+		jbtnLogin.setBounds(150,450,150,50);
+		jbtnExit.setBounds(350,450,150,50);
+		
+		
+		
+		
+		
+		
+		
+		jp1.add(jlbIp);
+		jp1.add(jlbPort);
+		jp1.add(jbtnLogin);
+		jp1.add(jbtnExit);
+		jp1.add(jtfIp);
+		jp1.add(jtfPort);
+		cl = new CardLayout();
+		//현재 프레임의 배치관리자를 카드레이아웃으로 변경
+		setLayout(cl);
+		
+		//이벤트 처리
+		jbtnLogin.addActionListener(this);//클릭하면 메세지 출력
+		jbtnExit.addActionListener(this);//클릭하면 메세지 출력
+		jbtnSend.addActionListener(this);//클릭하면 메세지 전송
+		jtf.addKeyListener(this);
+		
+		setBounds(100, 100, 600, 800);
+		jp1.setBackground(Color.white);
+		jp2.setBackground(Color.lightGray);
+		//현재 프레임에 패널을 부착add(패널,"이름");
+		add(jp2,"chat");
+		add(jp1,"login");
+		//카드레이아웃에서 컨텐츠패널에 어떤창을 붙일지 결정
+		cl.show(getContentPane(),"login");
+		//cl.show(getContentPane(), "chat");
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		ChatClient cl = new ChatClient();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		
+		if(obj==jbtnLogin) {
+			//System.out.println("로그인");
+			ip = jtfIp.getText();
+			port = Integer.parseInt(jtfPort.getText());
+			//채팅기능 수행
+			VChatting();
+			
+			
+			
+			
+			cl.show(getContentPane(), "chat");
+		
+		
+		}else if(obj==jbtnExit) {
+			System.out.println("종료");
+			System.exit(0);
+		}else if(obj == jbtnSend) {
+			//send 버튼을 누르면 
+			//엔터를 누르면
+			send();
+			
+			
+		}
+		
+		
+		
+		
+		
+	}
+	private void send() {
+		String msg = jtf.getText();
+		//jta.append("30 : "+msg+"\n");
+		//글자를 지우고
+		pw.println(msg);
+		pw.flush();
+		
+		jtf.setText("");
+		//포커스를 준다
+		jtf.requestFocus();
+	}
+	private void VChatting() {
+		//현재 클라이언트 프로그램을 여러개 띄우수 있도록 한다.
+		Thread th = new Thread(this);
+		th.start();
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int code = e.getKeyCode();
+		if(code==10) {
+			send();
+			}
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void run() {
+		//채팅
+		//1. 소캣객체 생성
+		//2. 수신부
+		try {
+			s = new Socket(ip,port);
+			br = new BufferedReader(
+					new InputStreamReader(
+							s.getInputStream()));
+			pw = new PrintWriter(
+					new BufferedWriter(
+							new OutputStreamWriter(
+									s.getOutputStream())));
+			//4. 반복해서 읽기
+			String msg = null;
+			while(true) {
+				msg = br.readLine();
+				jta.append(msg+"\n");
+				JScrollBar sb = jsp.getVerticalScrollBar();
+				int position = sb.getMaximum();        //<-글이 업데이트 되면 스크롤바가 최하단으로 가도록 설정.
+				sb.setValue(position);
+			}
+			//5. 화면에 출력
+		
+		
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+		
+	}
+	}
 2.multi thread 기능이 있는 server class 
+0)
+ArrayList를 member변수로 가지도록한다. 단  thread되어 만들어진 class(정보를 받고 보내는 기능이 있는 class)를 general로 사용한다.
+thread되어 만들어진 class에는 client의 정보를 받는 일반 생성자를 만들고 client로부터 메세지를 가져오고 모든 접속자에게 메세지를 전달하는 run method를 
+설정한다. 모든 접속자에게 메세지를 전달하기 위한 broadcast method를 만든다.
+1)
+기본적인 frame 설정을 하는  생성자 설정 
+2)
+서버소켓을 통해 client의 정보를 받아서 thread되어 만들어진 class(정보를 받고 보내는 기능이 있는 class)에 client 정보를 넣은후
+여러 사용자에게 메세지를 전달 할 수 있도록 thread되어 만들어진 class에 넣은 정보로 만들어진 객체를 다시 arralist에 넣고 thread를 작동시킨다.
+3)
+Mserver class가 가동되고 run method가 실행되면 arraylist에 있는 정보를 하나씩 꺼내서 전송할 수 있도록 broadcast method를 
+설정한다.
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class ChatServer extends JFrame 
+					implements ActionListener{
+	ArrayList<MServer> list 
+				= new ArrayList<MServer>();
+	ServerSocket ss;
+	
+	PrintWriter pw;
+	BufferedReader br;
+	
+	JTextArea jta;
+	JButton jbtnExit;
+	JScrollPane jsp;
+	
+	public ChatServer(){
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		jta = new JTextArea();
+		jsp = new JScrollPane(jta,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		jbtnExit = new JButton("종료");
+		Font f = new Font("굴림체",Font.PLAIN, 20);
+		jta.setFont(f);
+		
+		// 이벤트 처리 
+		jbtnExit.addActionListener(this);
+		
+		add(jsp,"Center");
+		add(jbtnExit,"South");
+		setBounds(100, 100, 600, 1000);
+		setVisible(true);
+		vChatStart();
+	}
+	private void vChatStart() {
+		//서버 소켓
+		try {
+			ss = new ServerSocket(5000);
+			//연결 대기
+			while(true) {
+				Socket client = ss.accept();
+				
+				MServer ms = new MServer(client);
+				//연결객체를  ArrayList 에 할당
+				//여러 사용자에게 메세지 전달 
+				list.add(ms);
+				ms.start();
+			}
+		} catch (IOException e) {
+			
+		}
+	}
+	public static void main(String[] args) {
+		ChatServer cs = new ChatServer();
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.exit(0);
+		
+	}// actgionPerformed() end 
+	// inner Class 
+	class MServer extends Thread {
+		Socket client;
+		PrintWriter pw;
+		BufferedReader br;
+		String ip;
+		MServer(Socket client){
+			this.client = client;
+			// 클라이언트의 IP 얻어오기 
+			ip = client.getInetAddress().getHostAddress();
+			broadcast(ip+"님이 접속하셨습니다");
+			try {
+				pw = new PrintWriter(
+						new BufferedWriter(
+								new OutputStreamWriter(
+										client.getOutputStream()))) ;
+				br = new BufferedReader(
+						new InputStreamReader(
+								client.getInputStream())) ;
+			} catch (IOException e) {
+				
+			}
+		}// constructor 
+		
+		@Override
+		public void run() {
+			// 동시에 처리할 코드 
+			while(true) {
+				String msg = null;
+				// 클라이언트로 부터 메세지 가져오기 
+				try {
+					msg = br.readLine();
+					
+					jta.append("[ " + ip + " ] "+ msg+"\n");
+					
+					// 모든 접속자에게 이 메세지 전달 
+					broadcast("[ " + ip + " ] "+ msg);
+					//오토 스크롤 기능 
+					JScrollBar sb = jsp.getVerticalScrollBar();
+				    int position = sb.getMaximum();
+				    sb.setValue(position);
+				} catch (IOException e) {
+					list.remove(this);
+				}
+				
+			}
+		}
+
+		private void broadcast(String msg) {
+			// ArrayList 안에 있는 객체를 하나씩 꺼내서 전송
+			// System.out.println("list : " + list);
+			for(MServer x : list) { //글자를 전달 시켜주고 끝난다. 
+				x.pw.println(msg);
+				x.pw.flush();
+			}
+			
+		}
+	}
+}// ChatServer class end 
+
+
+
+
