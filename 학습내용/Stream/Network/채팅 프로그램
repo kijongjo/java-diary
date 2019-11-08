@@ -1,6 +1,10 @@
 client class1개 server class 1개가 필요하다. 
 1.보통의 채팅창 frame + socket client class  
+0)runnable로 thread를 implements한다.
 1)두개의 판넬을 만들어 생성자 안에 로그인 화면과 채팅창 코드를 넣어 만든다. 각각의 판넬의 배치관리자를 설정한후 배치관리자 설정을 card layout으로 설정해준다.
-2)로그인 버튼을 선택시 
+2)로그인 버튼을 선택시 IP TEXT와 PORT TEXT를 받아와 IP와 PORT 변수에 저장후 CLIENT CLASS를 여러개 실행시키는 THREAD METOHD를 실행한다.
+  이후에 chatting 판넬이 보여지도록 설정한다.
+3)send 버튼과 엔터키를 누르면 text가 printwriter에 의해 다루어지도록하는 send method를 만든다.
+4)run method에서 받은 text가 printwriter에 의해 처리 되도록 하기 위해 printwriter의 경로를 socket과 연결한다. 
 
 2.multi thread 기능이 있는 server class 
