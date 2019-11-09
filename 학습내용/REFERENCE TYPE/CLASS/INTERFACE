@@ -6,7 +6,7 @@
 그래서 만든것이 interface 기능 .
 
 
-interface란?\
+interface란?
 interface class에서
 public interface 클래스명{}
 상위 class에서
