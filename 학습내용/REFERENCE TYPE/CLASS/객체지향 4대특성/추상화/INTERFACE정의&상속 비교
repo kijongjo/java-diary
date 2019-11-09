@@ -1,7 +1,13 @@
-
+요약
+다중 상속 정의                                          하위클래스에서 상위 클래스의 기능을 사용할 수 있도록 만드는 것.
+interface                                              interface 클래스이름 , implements 클래스이름(상위 class).
+Class의 member 변수로써 interface를 사용하고자 할 때     아래 내용 참고
+interface와 상속의 차이                                 상속 = 기능 확장 , interface = 동일한 기능 사용
 -----------------------------------------------------------------------------------------------------------------------------
 다중 상속이란?
-하위 클래스 하나가 상위 클래스 여러개와 연결되어 관계가 복잡해 지는 것을 말한다. 
+하위 클래스 하나가 상위 클래스 여러개와 연결되어 상위 클래스들의 기능을 하위 클래스에서 사용할 수 있도록 만드는 것을 말한다. 
+
+ex)
 상위 클래스 
 포유류,물속에 사는 동물 
 하위 클래스 
@@ -12,6 +18,7 @@
 하지만 자바는 언제나 단일 상속을 기본으로한다. 
 -------------------------------------------------------------------------------------------------------------------------------
 interface?
+
 상위 클래스의 경우
 public interface 클래스이름{ method();}
 하위 클래스의경우
@@ -58,14 +65,18 @@ public class FlameThrower implements Weapon {
 
 }
 -------------------------------------------------------------------------------------------------------------------------------
- Class의 member 변수로써 interface를  사용하기
+ Class의 member 변수로써 interface를 사용하고자 할 때
+
 상위 클래스에서
-class를 다른 class의 member변수로 설정. setter(하위class 변수이름){this.class변수 변수이름 = 변수이름 }
-                                       getter(){하위클래스 변수이름.기능();}
+특정 class를 다른 class의 member변수로 설정. 
+setter(하위class 변수이름){this.class변수 변수이름 = 변수이름 }
+getter(){하위클래스 변수이름.기능();}
+
 하위 interface class에서 
 method(){};
 하위의 하위 클래스 implements 하위 클래스 
 {@Override method{}}
+
 출력 class에서
 하위의 하위 클래스 객체 a 생성
 상위 클래스 객체 b 생성
@@ -73,10 +84,27 @@ b.setter(하위의 하위클래스 객체 a);                  <-상위 class의
 b.getter();                                          출력 class의 setter에는 하위의 하위 class 변수이름 들어감 
  
 
-위의 class를 member 변수로써 사용하는 것과 동일하다.  다만 부모 변수에 자식의 참조값을 넣을 수 있다는 원리를 추가할 뿐이다. 
-
+ 부모 변수에 자식의 참조값을 넣을 수 있다는 원리가 key point이다.
 
 ex)
+step
+1. interface Weapon 설정 
+method 설정 (interface의 method는 하위 class에서 overloading을 하지않으면 오류가 나온다.)
+
+2.무기이름 implements Weapon 설정
+ overriding 해야할 method {}설정
+
+3. interface weapon을 활용하고자 하는 class의 멤버 변수로 설정한다 . 
+
+Weapon a ;(= police has a weapon) 
+4. gun을 활용하는 방식과 똑같이 사용한다. 
+
+5.호출하는 파일에서 
+쓰고싶은 무기의 객체를 Instance해 참조값을 가지게 한 후 . 
+setWeapon(Weapon w){this.w= w; }에 weapon의 하위 class 객체를 setWeapon method에  
+넣어주면  Weapon w=Weapon 하위클래스 객체가 되어 하위 class 무기를 member변수로 설정
+하지 않아도  참조값을 따라 들어가게 된다. 
+
 상위 클래스
 public class Police {
 	String name, age, 계급; .
@@ -128,23 +156,6 @@ public class AK47 implements Weapon {
 
 }
 
-원리:
-1. interface Weapon 설정 
-method 설정 (interface의 method는 하위 class에서 overloading을 하지않으면 오류가 나온다.)
-
-2.무기이름 implements Weapon 설정
- overriding 해야할 method {}설정
-
-3. interface weapon을 활용하고자 하는 class의 멤버 변수로 설정한다 . 
-
-Weapon a ;(= police has a weapon) 
-4. gun을 활용하는 방식과 똑같이 사용한다. 
-
-5.호출하는 파일에서 
-쓰고싶은 무기의 객체를 Instance해 참조값을 가지게 한 후 . 
-setWeapon(Weapon w){this.w= w; }에 weapon의 하위 class 객체를 setWeapon method에  
-넣어주면  Weapon w=Weapon 하위클래스 객체가 되어 하위 class 무기를 member변수로 설정
-하지 않아도  참조값을 따라 들어가게 된다. 
 ---------------------------------------------------------------------------------------------------------------------------
 abstract class와 interface의 차이 
 
