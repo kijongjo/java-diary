@@ -1,0 +1,50 @@
+ Runnable 구현 방법 
+   
+   1)
+   Runnable class를 구현한다.
+   2)
+   run() override를 한다. 
+   3)
+   변수 선언을 한다. 
+   4)
+   thread class를 instance 한다. 
+   5)
+   객체이름.start();를 한다. 
+   
+   *Runnable의 단계가 더 복잡한데 그래도 사용하는 이유 ?
+   java에선 상속은 하나의 class 밖에 못하지만 구현은 여러가지를 할 수 있어서 
+   사용의 제약이 적다. 
+   
+   
+   ex)
+  public class ThreadEx3 implements Runnable {
+	String name;
+
+	ThreadEx3(String name) {
+		this.name = name;
+
+	}
+
+	@Override
+	public void run() {
+		
+		for (int i = 0; i <= 100; i++) {
+			System.out.println(name + ":" +i+ "미터 달리는 중");
+
+		}
+
+	}
+
+	
+	public static void main(String[] args) {
+ 	ThreadEx3 r1 = new ThreadEx3("토끼");
+ 	ThreadEx3 r2 = new ThreadEx3("토끼");
+ 	
+ 	Thread th1 = new Thread(r1);
+ 	Thread th2= new Thread(r2);
+ 	
+ 	th1.start();
+ 	th2.start();
+	}
+}
+   
