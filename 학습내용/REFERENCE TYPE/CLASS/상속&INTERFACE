@@ -169,11 +169,15 @@ public class 클래스이름(하위) extends 클래스이름(상위) implements 
  method(){};
  }
 자바에서 다중 상속을 대체하기 위해 만든 기능
-서로 관계가 없는 물체들이 상호작용을 하기 위해서 사용하느 장치나 시스템을 말한다. 
+서로 관계가 없는 물체들이 상호작용을 하기 위해서 사용하는 장치나 시스템을 말한다. 
 
 *interface특징
 상수와 abstracts method로만 이루어져 있다. 즉 method body가 없어야만 한다.  
 abstract를 쓰지 않아도 abstract의 기능을 가진다. 
+1)method는 public abstracts여야만 한다. 
+2)멤버변수는 public static fianl이여야만 한다. 
+3)interface class 선언시 public으로 선언하는 것이 일반적이다.
+4)interface는 interface로만 상속 받을 수 있으며 일반 class와 달리 다중 상속이 가능하다.
 
 
 ex)
