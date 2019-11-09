@@ -1,0 +1,98 @@
+*String객체명.charAt(문장의 n번째 수)
+String 문자열을 index로 치고 그중에 몇번째 index를 출력할지 정해 출력하는 명령어 
+
+ex)
+String str = "java oracle";
+char ch = str.charAt(3);
+System.out.println("4번째 문자 : " + ch); 
+
+o가 출력된다.
+
+
+*concat 
+객체1.concat(객체2)
+
+문자열과 문자열을 붙여주는 함수 concat . return값은 string으로 return한다.
+""를 찍어도 string class 이다.
+
+ex)
+
+
+String a="abc";
+String b="abcd";
+sysout(a.concat(b));
+abcabcd로 출력
+
+
+ex)
+"오늘은".concat("월요일");
+
+*method 체이닝
+n0.명령어(n1).명령어(n2).명령어(n3).명령어(n4)
+자전거 체인처럼 연결하여 엮는 방법.
+
+ex)
+	System.out.println("오늘은 ".concat("월요일  ").concat("내일은 ").concat("화요일").concat("  모레는 ").concat("수요일 "));
+
+
+*equalsIgonopreCase
+비교대상 문자열 또는 문자열을 담고있는 객체명.equalsIgonopreCase("문자열");
+대소문자 무시하고 내용이 동일한지 비교하는 메소드
+
+
+ex)
+"APPLE".equalsIgonopreCase("apple");  <-같다 라고 나온다.
+
+*해당 문자의 INDEX 위치를 리턴.
+문자열을 담고있는 객체 .indwxOf('확인하고싶은 문자');
+
+
+ex)
+String str = "java oracle";
+System.out.println("r 글자의 위치 : " +str.indexOf('r') );
+
+3출력
+
+*문자열 분해
+배열 명 = 문자열 또는 문자열을 담은 객체.toCharArray();
+
+
+ex)
+	String str = "java oracle";
+  char[] ch2 = str.toCharArray();
+  
+  ch2는{'j','a','v','a', 'o','r','a','c','l','e'}이 담겨진다.
+  
+  
+  *valueOf();
+  valueOf(넣고싶은정보);            <-static method다.
+  valueOf();함수는 입력받은 인자 값을 지정된 number 객체 형으로 변환하여 반환 한다. 이 인자값은 primitive data type 또는 문자열 등이 될 수 있다.
+  
+  ex)
+  	String str10 = String.valueOf(123);       
+    
+    123을 수가 아닌 string으로 저장한다.
+    
+   --------------------------------------------------------------------------------------------------------------------------------------
+   stringbuffer 
+   string class의 단점을 보완한 class 
+   
+   sb.
+  StringBuffer 객체 이름 = new StringBuffer();
+  StringBuffer sb = new StringBuffer();
+  sb.append("SELECT*");
+	sb.append("FROM EMP");
+	sb.append("WHERE deptno =10");
+ 
+	 System.out.println(sb.toString());      <-append로 이은것을 출력
+  
+  System.out.println(sb.reverse());        <-역순으로 출력해준다.
+  
+  
+  ------------------------------------------------------------------------------------------------------------------------------------------
+  객체.substring(수1,수2)); 
+  
+  주어진 문자열에서 인덱스 수1이상 ~ 수2미만까지의 값만 출력한다. 
+  ex)
+  String email = "dagda@hanafos.com";
+		System.out.println(email.substring(0, email.indexOf('@')));     <-수 대신에 email.indexOf('@') @까지만으로 한다는 명령어. 
