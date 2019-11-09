@@ -1,4 +1,16 @@
- Runnable 구현 방법 
+Thread ?
+메모리를 할당 받아 실행중인 프로그램을  프로세스라고 하는데 
+프로그램 내에서 실행되는 흐름의 단위를 Thread라고 한다.
+
+multi thread 
+하나의 환경에서 여러개의 일을 하는 것. 
+
+multi thread환경을 만드는 방법 2가지 
+1.thread 상속 
+2.Runnable interface
+
+
+Runnable 구현 방법 
    
    1)
    Runnable class를 구현한다.
