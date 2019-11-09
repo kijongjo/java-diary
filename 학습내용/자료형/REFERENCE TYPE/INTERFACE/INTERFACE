@@ -1,0 +1,158 @@
+요약
+다중 상속 정의                                          하위클래스에서 상위 클래스의 기능을 사용할 수 있도록 만드는 것.
+interface                                              interface 클래스이름 , implements 클래스이름(상위 class).
+Class의 member 변수로써 interface를 사용하고자 할 때     아래 내용 참고
+
+-----------------------------------------------------------------------------------------------------------------------------
+다중 상속이란?
+하위 클래스 하나가 상위 클래스 여러개와 연결되어 상위 클래스들의 기능을 하위 클래스에서 사용할 수 있도록 만드는 것을 말한다. 
+
+ex)
+상위 클래스 
+포유류,물속에 사는 동물 
+하위 클래스 
+고래 
+
+고래는 포유류와 물속에 사는 동물에 상속된다 . 
+
+하지만 자바는 언제나 단일 상속을 기본으로한다. 
+-------------------------------------------------------------------------------------------------------------------------------
+interface?
+
+상위 클래스의 경우
+public interface 클래스이름{ method();}
+하위 클래스의경우
+import package이름.class이름;                                                  <-만약 다른 package에 있을 경우 써준다.
+public class 클래스이름(하위) implements 클래스이름(상위)
+or
+public class 클래스이름(하위) extends 클래스이름(상위) implements 클래스이름(상위) <-상속과 interface를 같이 써주는 경우.
+{@Override
+ method(){};
+ }
+자바에서 다중 상속을 대체하기 위해 만든 기능
+서로 관계가 없는 물체들이 상호작용을 하기 위해서 사용하는 장치나 시스템을 말한다. 
+
+*interface특징
+상수와 abstracts method로만 이루어져 있다. 즉 method body가 없어야만 한다.  
+abstract를 쓰지 않아도 abstract의 기능을 가진다. 
+1)method는 public abstracts여야만 한다. 
+2)멤버변수는 public static fianl이여야만 한다. 
+3)interface class 선언시 public으로 선언하는 것이 일반적이다.
+4)interface는 interface로만 상속 받을 수 있으며 일반 class와 달리 다중 상속이 가능하다.
+
+
+ex)
+상위 class
+public interface Weapon {
+	public void use();
+
+	public void reuse();
+}
+하위 class
+public class FlameThrower implements Weapon {
+
+	@Override
+	public void use() {
+		// TODO Auto-generated method stub
+		System.out.println("화염발사:푸우우우우~");
+	}
+
+	@Override
+	public void reuse() {
+		// TODO Auto-generated method stub
+		System.out.println("연료 충전중...");
+	}
+
+}
+-------------------------------------------------------------------------------------------------------------------------------
+ Class의 member 변수로써 interface를 사용하고자 할 때
+
+상위 클래스에서
+특정 class를 다른 class의 member변수로 설정. 
+setter(하위class 변수이름){this.class변수 변수이름 = 변수이름 }
+getter(){하위클래스 변수이름.기능();}
+
+하위 interface class에서 
+method(){};
+하위의 하위 클래스 implements 하위 클래스 
+{@Override method{}}
+
+출력 class에서
+하위의 하위 클래스 객체 a 생성
+상위 클래스 객체 b 생성
+b.setter(하위의 하위클래스 객체 a);                  <-상위 class의 setter에는 하위 class 변수이름 
+b.getter();                                          출력 class의 setter에는 하위의 하위 class 변수이름 들어감 
+ 
+
+ 부모 변수에 자식의 참조값을 넣을 수 있다는 원리가 key point이다.
+
+ex)
+step
+1. interface Weapon 설정 
+method 설정 (interface의 method는 하위 class에서 overloading을 하지않으면 오류가 나온다.)
+
+2.무기이름 implements Weapon 설정
+ overriding 해야할 method {}설정
+
+3. interface weapon을 활용하고자 하는 class의 멤버 변수로 설정한다 . 
+
+Weapon a ;(= police has a weapon) 
+4. gun을 활용하는 방식과 똑같이 사용한다. 
+
+5.호출하는 파일에서 
+쓰고싶은 무기의 객체를 Instance해 참조값을 가지게 한 후 . 
+setWeapon(Weapon w){this.w= w; }에 weapon의 하위 class 객체를 setWeapon method에  
+넣어주면  Weapon w=Weapon 하위클래스 객체가 되어 하위 class 무기를 member변수로 설정
+하지 않아도  참조값을 따라 들어가게 된다. 
+
+상위 클래스
+public class Police {
+	String name, age, 계급; .
+	
+	Weapon w;                      <-interface class
+	Police() {
+		name = "포돌이";
+		계급 = "순경";
+	}
+
+	public void setWeapon(Weapon a) {this.w=a;}
+	
+	public void use() {w.use();}
+
+
+	void 체포하기() {
+		System.out.println("미란다 원칙");
+	}
+
+	void 먹기() {
+		System.out.println("도넛 먹기");
+	}
+}
+
+-----------------------------------------------------
+interface 클래스
+public interface Weapon {
+	public void use();
+
+	public void reuse();
+}
+------------------------------------------------------
+interface의 하위 클래스
+public class AK47 implements Weapon {
+
+	@Override
+	public void use() {
+		System.out.println("AK47:빵~~~");
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void reuse() {
+		System.out.println("AK47:재장전");
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
