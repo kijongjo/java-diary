@@ -17,7 +17,7 @@
 		String sql = "SELECT empno,ename,sal FROM emp";
 		ResultSet rs = null;
 	
-2.JDBC 드라이버 로딩
+2.JDBC 드라이버 로딩&jdbc 드라이버 로딩되어 있는지 여부 체크
 		String url = "jdbc:oracle:thin:@192.168.0.35:1521:orcl";
                   jdbc:jdbc에서
 		                   oracle: oracle 연결
@@ -27,29 +27,27 @@
 		                                                   ORCL:DB NAME
                                                        
                                                        
-                                                       
-                                                       
-3.jdbc 드라이버 로딩되어 있는지 여부 체크
-	  Class.forName(driver);
+        jdbc 드라이버 로딩되어 있는지 여부 체크                                
+                       Class.forName(driver);
 			
             
-4.연결(connection)
+3.연결(connection)
 	  conn = DriverManager.getConnection(url, user, password);      
     
 
-5.sql문 작성
+4.sql문 작성
 		String sql = "SELECT * FROM dept where deptno=10";
     
 
-6.문장 객체 생성
+5.문장 객체 생성
     pstmt = conn.prepareStatement(sql);
    
    
-7.실행(select ==> resultset)
+6.실행(select ==> resultset)
 	   rs = pstmt.executeQuery();
     
 
-8.레코드별 처리,다음 레코드로 이동
+7.레코드별 처리,다음 레코드로 이동
 		
 			while (rs.next()) {                                       <-다음 줄을 가져오도록 하는 명령어 
 				int deptno = rs.getInt("deptno");                       <-가져온 값의 데이터 타입에 따라 명령어가 다르다.String의 경우 getString
@@ -58,7 +56,7 @@
 				System.out.println(deptno + ":" + dname + ":" + loc);
         
  
-9.자원 반납
+8.자원 반납
       if (rs != null)
 					rs.close();
 			if (pstmt != null)
