@@ -1,0 +1,45 @@
+9단계의 DB연결 과정중 STEP 5 SQL문 작성 요령에 대해서.
+
+기존 SQL문장 String sql = "SELECT * FROM EMP";에서  sql +="where deptono = 10"; 문장을 추가하게 되면 
+                                                    heap에 공간을 하나 더만들어서 찾아가게 하기때문에 효율이 안좋다.
+                                                    
+때문에 STRING의 단점을 보완한 StringBuffer sql = new StringBuffer();를 써준다.
+StringBuffer instance 후에 append(); method로 문장을 하나씩 붙여주는 것이 더 효율적이다. 
+ex)
+    sql.append("SELECT empno,ename,job ");                  <-사이에 공백이 있어야한다.
+		sql.append("FROM EMP ");
+		sql.append("WHERE DEPTNO = 10");
+
+STEP 7 문장객체를 생성해 DB에 보낼 때 sql 변수에 .toString(); method를 붙여 주어야만 한다. 
+
+ex)
+    pstmt = conn.prepareStatement(sql.toString());
+    
+-------------------------------------------------------------------------------------------------------------------------------------
+SQL문장에 변수를 삽입해 다루기 
+
+SQL문장에 변수를 삽입해 문장을 완성할 수 있다. SQL문장에서 변수가 들어갈 자리에 ?를 놓는다. ?는 INDEX처럼 사용되어서 
+문장 객체 생성시 setString(?갯수에서 몇번째인지에 대한 수,"들어갈 내용");이 된다. 
+
+ex)
+   sql.append("INSERT into dept ");
+	 sql.append("values (DEPT_DEPTNO.NEXTVAL,?,?)");
+
+
+*DEPT_DEPTNO.NEXTVAL
+만약 INSERT시 같은 번호가 존재 한다면 다음번호를 가지도록 하는 명령어 
+
+*DB 연동시 JAVA 특징  
+JAVA는 AUTO COMMIT이 된다.        
+	                                                             
+-----------------------------------------------------------------------------------------------------------------------------------
+정보 삽입인지 출력인지에 따라 step 7 실행에 대한 명령어가 달라진다. 
+
+SELECT인 경우 
+.executeQuery();
+INSERT,DELETE,UPDATE인 경우
+.executeUpdate();
+
+
+
+
