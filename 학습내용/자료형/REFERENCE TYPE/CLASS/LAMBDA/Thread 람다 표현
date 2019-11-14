@@ -1,0 +1,49 @@
+package day23;
+
+//쓰레드 사용해 화면에 1부터 100까지 출력 
+public class LamdaEx12 {
+
+	public static void main(String[] args) {
+		Thread th = new Thread() {// 익명 inner class로 run method override
+			@Override
+			public void run() {
+				for (int i = 0; i < 100; i++) {
+					System.out.println(Thread.currentThread().getName() + ":" + i);
+				}
+			}
+
+		};
+		th.start();// <-run method 실행
+		System.out.println("---------------------------------"); // <-main method 후에 thread 가 나오게 된다.
+
+		// Thread th2 = new Thread(runnable 인터페이스 구현 객체 );
+		// th2.start();
+		// 표현1
+		new Thread(() -> {
+			for (int i = 0; i < 100; i++) {
+				System.out.println(Thread.currentThread().getName() + ":" + i);
+			}
+
+		});
+		// 표현2
+		Runnable r = () -> {
+			for (int i = 0; i < args.length; i++) {
+				System.out.println(Thread.currentThread().getName() + ":" + i);
+			}
+		};
+		Thread th1 = new Thread(r);
+		th1.start();
+
+		// 표현3
+		new Thread(r).start();// method chaining
+
+		// 표현4
+		new Thread(() -> {
+			for (int i = 0; i < 100; i++) {
+				System.out.println(Thread.currentThread().getName() + ":" + i);
+			}
+
+		}).start();
+
+	}
+}
