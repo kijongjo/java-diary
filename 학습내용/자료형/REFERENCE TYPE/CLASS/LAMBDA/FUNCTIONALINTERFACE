@@ -1,0 +1,11 @@
+FunctionalInterface란?
+@FunctionalInterface
+인터페이스가 처음부터 람다식을 쓸 수 있는 인터페이스라는 것을 정의 
+ex)
+
+@FunctionalInterface 
+interface Merge {
+	public int add(int a, int b);
+	// public int minus(int a, int b);
+}
+
