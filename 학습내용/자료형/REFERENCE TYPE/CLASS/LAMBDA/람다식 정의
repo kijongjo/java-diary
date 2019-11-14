@@ -1,0 +1,34 @@
+람다정의?
+(매개변수) ->{실행문} 
+method를 하나의 식으로 표현한 것을 말한다. 
+
+
+*장점과 단점
+장점
+1.간결성
+2.간결성에 의한 가독성 향상 
+3.함수 제작 skip을 통한 코딩 시간 감소
+4.병렬 프로그램 용이 
+
+
+단점
+1.재사용 불가능(익명함수)
+2.디버깅 어려움
+3.람다 남용에 의한 코드 중복 가능성 존재
+4.재귀 적용에 부적합
+
+
+ex)
+interface Caculater{
+	int cal(int a, int b);
+}
+public class LamdaEx2 {
+   public static void main(String[] args) {
+	Caculater c; 
+	c=(a,b) -> {return a+b;};                       <-매개 변수 두개 -> return 방식으로 처리
+	System.out.println(c.cal(100, 200));
+
+
+
+
+
