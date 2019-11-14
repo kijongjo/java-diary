@@ -1,0 +1,28 @@
+ARRAYLIST 람다 표현?
+람다 method
+CLASS명<자료형명> 객체명 = (CLASS의 METHOD에 있는 매개변수 명)->{arraylist에 들어갈 return값}
+for문 
+arraylist 객체명 . add(람다 method)
+
+ex)
+
+interface MakeList<T> {
+	public int make(int n);
+}
+
+public class LamdaEx8 {
+	public static void main(String[] args) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+
+		MakeList<Integer> mlist = (n) -> {  
+			Random rnd = new Random();
+			return rnd.nextInt(100) + 1;
+		};
+
+		for (int i = 0; i < 10; i++) {
+			list.add(mlist.make(i));             <-method를 arraylist에 추가해준다.
+		}
+		System.out.println("list : " + list);
+	}
+
+}
