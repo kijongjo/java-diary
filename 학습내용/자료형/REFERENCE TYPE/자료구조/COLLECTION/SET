@@ -131,3 +131,17 @@ for (int x : array) {
 		}
 
 
+map 객체.contentskey(키이름)
+map 객체.contentskey(키이름)은 true 혹은 false로 값을 반환하게 되는 method이다. 
+만약에 특정 key에 따른 값이 매칭이 되어있다면 true로 값을 반환하고 그렇지 않다면 false로 반환하게 된다. 
+
+
+
+map.get(키이름)
+키와 매칭되는 값을 반환하여 출력해준다. 
+
+
+
+
+
+
